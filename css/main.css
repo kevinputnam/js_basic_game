@@ -1,0 +1,180 @@
+html {
+    background-color: #555555;
+}
+
+.editor {
+    position: relative;
+    background-color: #ffffff;
+    color: #000000;
+    font: 12px/14px monospace;
+    width:1200px; /* or whatever width you want. */
+    max-width:1200px; /* or whatever width you want. */
+    height: 850px;
+    max-height:  850px;
+    padding: 10px;
+}
+
+#gameview {
+    position: absolute;
+    left: 10px;
+    top:  30px;
+    width: 400px;
+    height: 800px;
+    max-height: 800px;
+    max-width: 400px;
+    border:  1px solid #000000;
+    padding:  10px;
+    -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
+    scrollbar-width: none; /*hides scroll bars for firefox*/
+}
+
+#gameview::-webkit-scrollbar {
+    display: none; /*hides scroll bars for webkit browsers*/
+}
+
+#editview {
+    overflow: scroll;
+    position: absolute;
+    left: 440px;
+    top: 30px;
+    width: 750px;
+    height: 270px;
+    padding: 10px;
+    border:  1px solid #000000;
+    -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
+    scrollbar-width: none; /*hides scroll bars for firefox*/
+}
+
+#editview::-webkit-scrollbar {
+    display:none; /*hides scroll bars for webkit browsers*/
+}
+
+div .itemview {
+  position:relative;
+  top: 5px;
+  left:15px;
+  width:100%;
+}
+
+div .editsave {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+#mapview {
+    overflow: scroll;
+    position: absolute;
+    left: 440px;
+    top: 330px;
+    width: 750px;
+    height: 500px;
+    padding: 10px;
+    border:  1px solid #000000;
+    -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
+    scrollbar-width: none; /*hides scroll bars for firefox*/
+}
+
+#mapview::-webkit-scrollbar {
+    display:none; /*hides scroll bars for webkit browsers*/
+}
+
+div .treenode {
+  position:relative;
+  left:20px;
+  width:100%;
+}
+
+#sceneview {
+    position: absolute;
+    left: 10px;
+    top: 330px;
+    width: 400px;
+    height: 480px;
+    padding: 10px;
+    border:  1px solid #000000;
+    overflow: scroll;
+    -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
+    scrollbar-width: none; /*hides scroll bars for firefox*/
+}
+
+#sceneview::-webkit-scrollbar {
+    display:none; /*hides scroll bars for webkit browsers*/
+}
+
+
+ul, .treeview {
+  list-style-type: none;
+  padding-inline-start: 15px;
+}
+
+/* Remove margins and padding from the parent ul */
+.treeview {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
+
+
+.select-highlight {
+    background-color: lightgray;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+/* Hide the nested list */
+.hidden {
+  display: none;
+}

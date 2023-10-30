@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Adventure Game Editor</title>
+</head>
+<body>
+    <select id="gamefilepicker" ></select>
+    <button type="button" id="loadbutton" onclick="get_game_data()">Load</button>
+    <button type="button" id="savebutton" onclick="save_game()">Save</button>
+    <button type="button" id="newbutton" onclick="create_new_game()">New</button>
+    <button type="button" id="runbutton" onclick="run_game()">Run</button>
+    <button type="button" id="stopbutton" onclick="stop_game()">Stop</button>
+    <div id="editor" class="editor">
+        <div id="gameview">
+            <h2><span id="gametitle">Game Data<span></h2>
+            <div id="gamedata">
+            </div>
+        </div>
+        <div id="editview"></div>
+        <div id="mapview"></div>
+    </div>
+    <script src="js/utilities.js"></script>
+    <script src="js/buildingblock.js"></script>
+    <script src="js/gamecontainer.js"></script>
+    <script src="js/things.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/actions.js"></script>
+    <script src="js/scenes.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/editor.js"></script>
+    <script type="text/javascript">populate_game_picker();</script>
+</body>
+</html>

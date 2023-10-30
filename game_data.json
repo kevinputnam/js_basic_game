@@ -1,0 +1,111 @@
+{
+  "name": "The Corridor: AD 3072",
+  "description": "Adventure among the war ravaged stars of humanity.",
+  "actions": [
+    {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "splash_timer",
+      "value": "1000"
+    },
+    {
+      "name": "Action_change_scene",
+      "actions": null,
+      "scene_id": 0,
+      "player_pos": [
+        0,
+        0
+      ]
+    }
+  ],
+  "author": "",
+  "things": {},
+  "player": {
+    "name": "Jane Fowler",
+    "description": "Doctor, adventurer.",
+    "things": [],
+    "actions": [],
+    "hidden": false,
+    "trigger": false,
+    "triggered": false,
+    "location": [
+      0,
+      0
+    ],
+    "dimensions": [
+      0,
+      0
+    ],
+    "spritePath": ""
+  },
+  "scenes": {
+    "0": {
+      "name": "Logo",
+      "description": "My Logo",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": 0,
+          "variable": "splash_timer"
+        },
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "1",
+          "player_pos": [
+            0,
+            0
+          ]
+        }
+      ],
+      "id": 0,
+      "background": "assets/backgrounds/logoscreen.bmp",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {}
+    },
+    "1": {
+      "name": "Title",
+      "description": "The Corridor: AD 3072",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": 0,
+          "variable": "splash_timer"
+        },
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": 0,
+          "player_pos": [
+            0,
+            0
+          ]
+        }
+      ],
+      "id": 1,
+      "background": "assets/backgrounds/title.png",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {}
+    },
+    "2": {
+      "name": "Starport",
+      "description": "A great place to catch a ride to just about anywhere.",
+      "things": [],
+      "actions": [],
+      "id": 2,
+      "background": "assets/backgrounds/starport.png",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {}
+    }
+  }
+}
