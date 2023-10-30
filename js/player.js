@@ -10,7 +10,7 @@ class Player extends Thing {
     this.trigger = false;
     this.triggered = false;
 
-    this.spriteImage= null;
+    this.spriteImage= document.createElement('img');
     this.spritePath = "";
     this.location = [0,0];
     this.dimensions = [0,0];

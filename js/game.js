@@ -316,14 +316,22 @@ class Game extends GameContainer {
   }
 
   drawCollisions(){
-    this.updatePlayView();
-    this.playContext.fillStyle='red';
-    const collDim = this.currentScene.collisionDimensions;
-    for(const [x_str,y_list] of Object.entries(this.currentScene.collisions)){
-      var x_coord = parseInt(x_str)*collDim;
-      for(var y of y_list){
-        var y_coord = y*collDim;
-        this.playContext.fillRect(x_coord, y_coord, collDim, collDim);
+    if (this.currentScene){
+      this.updatePlayView();
+      this.playContext.fillStyle='red';
+      const collDim = this.currentScene.collisionDimensions;
+      for(const [x_str,y_list] of Object.entries(this.currentScene.collisions)){
+        var x_coord = parseInt(x_str)*collDim;
+        for(var y of y_list){
+          var y_coord = y*collDim;
+          this.playContext.fillRect(x_coord, y_coord, collDim, collDim);
+        }
+      }
+      //call out the things
+      this.playContext.fillStyle='rgba(225,225,225,0.5)';
+      for (const thing_id of this.currentScene.things){
+        const thing = this.things[thing_id];
+        this.playContext.fillRect(thing.location[0],thing.location[1],thing.dimensions[0],thing.dimensions[1]);
       }
     }
   }

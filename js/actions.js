@@ -325,13 +325,16 @@ class Action_change_scene extends Action {
   load(data){
     super.load(data);
     this.scene_id = data['scene_id'];
-    this.player_pos = data['player_pos'];
+    this.player_pos[0] = parseInt(data['player_pos'][0]);
+    this.player_pos[1] = parseInt(data['player_pos'][1]);
   }
 
   save(){
     var data = super.save();
     data['scene_id'] = this.scene_id;
-    data['player_pos'] = this.player_pos;
+    data['player_pos'] = [];
+    data['player_pos'][0] = this.player_pos[0];
+    data['player_pos'][1] = this.player_pos[1];
     return data;
   }
 
@@ -369,14 +372,14 @@ class Action_change_scene extends Action {
     var xInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':this.game.screenDimensions[0]});
     xInputField.value = this.player_pos[0];
     xInputField.addEventListener("change", (event)=> {
-      me.player_pos[0] = event.target.value;
+      me.player_pos[0] = parseInt(event.target.value);
       me.game.updatePlayView();
     })
 
     var yInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':this.game.screenDimensions[1]});
     yInputField.value = this.player_pos[1];
     yInputField.addEventListener("change", (event)=> {
-      me.player_pos[1] = event.target.value;
+      me.player_pos[1] = parseInt(event.target.value);
       me.game.updatePlayView();
     })
 
@@ -462,7 +465,7 @@ class Action_menu extends Action {
       promptText += line + "\n";
     }
 
-    var promptInputField = createElementWithAttributes('input',{'type':'text','maxlength':'25','size':'17'});
+    var promptInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'25'});
     promptInputField.value = promptText;
     promptInputField.addEventListener("change", (event)=> {
       me.prompt = event.target.value.split('\n');

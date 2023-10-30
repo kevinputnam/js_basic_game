@@ -9,6 +9,12 @@
       "value": "1000"
     },
     {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "starport_first_visit",
+      "value": "true"
+    },
+    {
       "name": "Action_change_scene",
       "actions": null,
       "scene_id": 0,
@@ -19,7 +25,74 @@
     }
   ],
   "author": "",
-  "things": {},
+  "things": {
+    "0": {
+      "name": "Hospital",
+      "description": "Door to the hospital",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Yes",
+            "No"
+          ],
+          "prompt": [
+            "The Hospital: do you want go in?"
+          ],
+          "variable": "enter_hospital",
+          "useValue": true
+        }
+      ],
+      "id": 0,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        128,
+        96
+      ],
+      "dimensions": [
+        32,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "1": {
+      "name": "Planet Jumper Tavern",
+      "description": "Door to the tavern",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Yes",
+            "No"
+          ],
+          "prompt": [
+            "Planet Jumper Tavern: go in?"
+          ],
+          "variable": "enter_tavern",
+          "useValue": true
+        }
+      ],
+      "id": 1,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        0,
+        144
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    }
+  },
   "player": {
     "name": "Jane Fowler",
     "description": "Doctor, adventurer.",
@@ -33,10 +106,10 @@
       0
     ],
     "dimensions": [
-      0,
-      0
+      16,
+      16
     ],
-    "spritePath": ""
+    "spritePath": "assets/sprites/jane.png"
   },
   "scenes": {
     "0": {
@@ -81,10 +154,10 @@
         {
           "name": "Action_change_scene",
           "actions": null,
-          "scene_id": 0,
+          "scene_id": "2",
           "player_pos": [
-            0,
-            0
+            180,
+            140
           ]
         }
       ],
@@ -98,14 +171,288 @@
     "2": {
       "name": "Starport",
       "description": "A great place to catch a ride to just about anywhere.",
-      "things": [],
-      "actions": [],
+      "things": [
+        0,
+        1
+      ],
+      "actions": [
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "This is the Corridor, a region",
+                "of space that was once at",
+                "the edge of human explored",
+                "space. It is also the site ",
+                "of first contact with non-",
+                "human sentient species."
+              ]
+            },
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "The planets in the corridor",
+                "have embraced a more",
+                "cosmopolitan view of the",
+                "Universe and have joined",
+                "a loose affiliation of species",
+                "and worlds."
+              ]
+            },
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "You are Jane Fowler: doctor and",
+                "adventurer. You have come to the",
+                "Starport to pick up medical",
+                "supplies crucial to the survival",
+                "of the inhabitants of a planet",
+                "deep inside of human space."
+              ]
+            },
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "Your mission is to gather",
+                "the supplies, find transport",
+                "to your destination, and",
+                "deliver them. Good luck!"
+              ]
+            }
+          ],
+          "val1": "`$starport_first_visit`",
+          "val2": "true",
+          "operator": "=="
+        }
+      ],
       "id": 2,
       "background": "assets/backgrounds/starport.png",
-      "draw_player": false,
+      "draw_player": true,
       "map_size": [],
       "grid_size": null,
-      "collisions": {}
+      "collisions": {
+        "0": [
+          1,
+          12
+        ],
+        "1": [
+          1,
+          13
+        ],
+        "2": [
+          1,
+          19,
+          14
+        ],
+        "3": [
+          1,
+          0,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14
+        ],
+        "6": [
+          28,
+          29
+        ],
+        "7": [
+          28
+        ],
+        "8": [
+          28,
+          4,
+          5,
+          6,
+          7,
+          8,
+          10,
+          9,
+          11,
+          12
+        ],
+        "9": [
+          28,
+          4,
+          13
+        ],
+        "10": [
+          28,
+          4,
+          14
+        ],
+        "11": [
+          28,
+          4,
+          15
+        ],
+        "12": [
+          28,
+          4,
+          15
+        ],
+        "13": [
+          28,
+          4,
+          15
+        ],
+        "14": [
+          28,
+          0,
+          1,
+          2,
+          3,
+          15
+        ],
+        "15": [
+          28,
+          15,
+          14,
+          13
+        ],
+        "16": [
+          28
+        ],
+        "17": [
+          28,
+          29
+        ],
+        "18": [
+          0
+        ],
+        "19": [
+          1
+        ],
+        "20": [
+          13,
+          2
+        ],
+        "21": [
+          13,
+          3
+        ],
+        "22": [
+          14,
+          4
+        ],
+        "23": [
+          15,
+          4
+        ],
+        "24": [
+          15,
+          4
+        ],
+        "25": [
+          15,
+          5
+        ],
+        "26": [
+          15,
+          6,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ],
+        "27": [
+          15,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          7,
+          24
+        ],
+        "28": [
+          24
+        ],
+        "29": [
+          24
+        ],
+        "30": [
+          24
+        ],
+        "31": [
+          24,
+          25
+        ],
+        "32": [
+          26
+        ],
+        "33": [
+          26,
+          27
+        ],
+        "34": [
+          28
+        ],
+        "35": [
+          29,
+          28
+        ],
+        "36": [
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          7,
+          8,
+          6
+        ],
+        "37": [
+          16,
+          17,
+          6
+        ],
+        "38": [
+          18,
+          19,
+          6
+        ],
+        "39": [
+          19,
+          6
+        ],
+        "40": [
+          19,
+          6
+        ],
+        "41": [
+          19,
+          18,
+          17,
+          6
+        ],
+        "42": [
+          17,
+          6
+        ],
+        "43": [
+          17,
+          6
+        ],
+        "44": [
+          17,
+          6
+        ]
+      }
     }
   }
 }

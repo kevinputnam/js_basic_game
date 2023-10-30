@@ -139,11 +139,13 @@ class GameContainer extends BuildingBlock{
   }
 
   addThing(thing_id){
-    this.things.push(parseInt(thing_id));
-    this.game.things[thing_id].parent = this;
-    for (const node of this.nodes){
-      var thingNodes = this.getChildContainer(node,'things');
-      thingNodes.append(this.game.things[thing_id].display());
+    if(Object.keys(this.game.things).includes(thing_id)){
+      this.things.push(parseInt(thing_id));
+      this.game.things[thing_id].parent = this;
+      for (const node of this.nodes){
+        var thingNodes = this.getChildContainer(node,'things');
+        thingNodes.append(this.game.things[thing_id].display());
+      }
     }
     //this.edit(this.currentNode);
   }

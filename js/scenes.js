@@ -35,7 +35,7 @@ class Scene extends GameContainer {
     if(this.background){
       this.backgroundImage.setAttribute('src',this.background);
       this.backgroundImage.addEventListener("load", (e) => {
-        me.game.updatePlayView();
+        me.game.drawCollisions();
       });
     }
     this.draw_player = data['draw_player'];
@@ -62,13 +62,11 @@ class Scene extends GameContainer {
     var me = this;
     var editView = document.getElementById('editview');
 
-    this.game.updatePlayView();
-
     var drawPlayerCheckbox = createElementWithAttributes('input',{'type':'checkbox'});
     drawPlayerCheckbox.checked = this.draw_player;
     drawPlayerCheckbox.addEventListener("change", (event)=>{
       me.draw_player = event.target.checked;
-      me.game.updatePlayView();
+      me.game.drawCollisions();
     })
 
     var playerLabel = document.createElement("label");
@@ -93,10 +91,11 @@ class Scene extends GameContainer {
       me.backgroundImage.setAttribute('src',event.target.value);
     })
 
-    this.game.editCollisions();
-
     editView.append(inputLabel,imageFileInputField,document.createElement('br'),backgroundThumbnail,document.createElement('br'));
     editView.append(this.createRemoveButton(),document.createElement('br'),document.createElement('br'));
+
+    this.game.editCollisions();
+
   }
 
   remove(){
@@ -107,6 +106,6 @@ class Scene extends GameContainer {
     var editView = document.getElementById('editview');
     editView.replaceChildren();
     this.game.currentScene = null;
-    this.game.updatePlayView();
+    this.game.drawCollisions();
   }
 }
