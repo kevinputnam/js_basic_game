@@ -200,7 +200,37 @@
                 "cosmopolitan view of the",
                 "Universe and have joined",
                 "a loose affiliation of species",
-                "and worlds."
+                "and worlds ushering a new",
+                "era of peace and prosperity.",
+                ""
+              ]
+            },
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "The rest of humanity has",
+                "refused to join, and has",
+                "continued the long, slow",
+                "descent into darkness as",
+                "various factions vie for",
+                "dominance. War, disease,",
+                "and famine are still common.",
+                ""
+              ]
+            },
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "Sadly, the bylaws of the",
+                "sentient affiliation say that",
+                "members may not interfere",
+                "with planets who do not join.",
+                "Still, some humans refuse to",
+                "ignore what is going",
+                "on. You are one of them.",
+                ""
               ]
             },
             {

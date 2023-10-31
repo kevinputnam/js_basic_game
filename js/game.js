@@ -328,7 +328,7 @@ class Game extends GameContainer {
         }
       }
       //call out the things
-      this.playContext.fillStyle='rgba(225,225,225,0.5)';
+      this.playContext.fillStyle='rgba(225,225,225,0.7)';
       for (const thing_id of this.currentScene.things){
         const thing = this.things[thing_id];
         this.playContext.fillRect(thing.location[0],thing.location[1],thing.dimensions[0],thing.dimensions[1]);
