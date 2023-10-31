@@ -293,18 +293,15 @@ class Game extends GameContainer {
             function (event) {
               var collisions = me.currentScene.collisions;
               var collisionLocScale = me.ctxScaling * me.currentScene.collisionDimensions;
-              var collClickX = Math.floor(event.layerX/collisionLocScale);
-              var collClickY = Math.floor(event.layerY/collisionLocScale);
-              console.log("click location: [" + collClickX + "," + collClickY + "]");
+              var collClickX = Math.floor(event.offsetX/collisionLocScale);
+              var collClickY = Math.floor(event.offsetY/collisionLocScale);
               if(!Object.keys(collisions).includes(collClickX.toString())){
                 collisions[collClickX] = [collClickY];
               }else if (!collisions[collClickX].includes(collClickY)){
                 collisions[collClickX].push(collClickY);
               }else{
-                console.log("remove Y!");
                 collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
               }
-              console.log(collisions);
               me.drawCollisions();
             },
             false,
