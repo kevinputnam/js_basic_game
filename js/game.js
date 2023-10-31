@@ -104,7 +104,7 @@ class Game extends GameContainer {
         console.log("$" + this.menuVariable + " set to " + this.menuSelectorIndex);
         this.variables[this.menuVariable] = this.menuSelectorIndex;
         if (this.menuUseValue){
-          this.variables[this.menuVariable] = this.menuChoices[this.menuSelectorIndex];
+          this.variables[this.menuVariable] = '"' + this.menuChoices[this.menuSelectorIndex] + '"';
         }
         this.dismissMenu();
         break;
@@ -315,7 +315,7 @@ class Game extends GameContainer {
   drawCollisions(){
     if (this.currentScene){
       this.updatePlayView();
-      this.playContext.fillStyle='red';
+      this.playContext.fillStyle='rgba(225,0,0,0.7)';
       const collDim = this.currentScene.collisionDimensions;
       for(const [x_str,y_list] of Object.entries(this.currentScene.collisions)){
         var x_coord = parseInt(x_str)*collDim;

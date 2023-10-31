@@ -76,6 +76,23 @@
           ],
           "variable": "enter_tavern",
           "useValue": true
+        },
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_change_scene",
+              "actions": null,
+              "scene_id": "3",
+              "player_pos": [
+                176,
+                160
+              ]
+            }
+          ],
+          "val1": "`$enter_tavern`",
+          "val2": "'Yes'",
+          "operator": "=="
         }
       ],
       "id": 1,
@@ -85,6 +102,35 @@
       "location": [
         0,
         144
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "2": {
+      "name": "Return to Starport",
+      "description": "The door from the tavern back to the starport",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "2",
+          "player_pos": [
+            0,
+            160
+          ]
+        }
+      ],
+      "id": 2,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        176,
+        176
       ],
       "dimensions": [
         16,
@@ -259,6 +305,12 @@
           "val1": "`$starport_first_visit`",
           "val2": "true",
           "operator": "=="
+        },
+        {
+          "name": "Action_set_var",
+          "actions": null,
+          "variable": "starport_first_visit",
+          "value": "false"
         }
       ],
       "id": 2,
@@ -299,7 +351,6 @@
         ],
         "8": [
           28,
-          4,
           5,
           6,
           7,
@@ -307,7 +358,8 @@
           10,
           9,
           11,
-          12
+          12,
+          4
         ],
         "9": [
           28,
@@ -481,6 +533,123 @@
         "44": [
           17,
           6
+        ]
+      }
+    },
+    "3": {
+      "name": "Planet Jumper Tavern",
+      "description": "A good place to get a drink or a cracked skull.",
+      "things": [
+        2
+      ],
+      "actions": [],
+      "id": 3,
+      "background": "assets/backgrounds/generic_room.png",
+      "draw_player": true,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "13": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "14": [
+          7,
+          22
+        ],
+        "15": [
+          22,
+          7
+        ],
+        "16": [
+          22,
+          7
+        ],
+        "17": [
+          22,
+          7
+        ],
+        "18": [
+          22,
+          7
+        ],
+        "19": [
+          22,
+          7
+        ],
+        "20": [
+          22,
+          7
+        ],
+        "21": [
+          22,
+          7
+        ],
+        "22": [
+          7
+        ],
+        "23": [
+          7
+        ],
+        "24": [
+          22,
+          7
+        ],
+        "25": [
+          22,
+          7
+        ],
+        "26": [
+          22,
+          7
+        ],
+        "27": [
+          22,
+          7
+        ],
+        "28": [
+          22,
+          7
+        ],
+        "29": [
+          22,
+          7
+        ],
+        "30": [
+          22,
+          7
+        ],
+        "31": [
+          22,
+          7
+        ],
+        "32": [
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          10,
+          9,
+          8
         ]
       }
     }
