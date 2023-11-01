@@ -38,7 +38,8 @@ class Thing extends GameContainer {
     //TODO add sprite handling this.sprite = ?
     this.location[0] = data['location'][0];
     this.location[1] = data['location'][1];
-    this.dimensions = data['dimensions'];
+    this.dimensions[0] = data['dimensions'][0];
+    this.dimensions[1] = data['dimensions'][1];
 
     var newcoords = []
     for(var item of this.location){
@@ -72,7 +73,9 @@ class Thing extends GameContainer {
     data['location'] = [];
     data['location'][0] = this.location[0];
     data['location'][1] = this.location[1];
-    data['dimensions'] = this.dimensions;
+    data['dimensions'] = [];
+    data['dimensions'][0] = this.dimensions[0];
+    data['dimensions'][1] = this.dimensions[1];
     data['spritePath'] = this.spritePath;
 
     return data;
@@ -121,14 +124,14 @@ class Thing extends GameContainer {
     var xInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':this.game.screenDimensions[0]});
     xInputField.value = this.location[0];
     xInputField.addEventListener("change", (event)=> {
-      me.location[0] = event.target.value;
+      me.location[0] = parseInt(event.target.value);
       me.game.drawCollisions();
     })
 
     var yInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':this.game.screenDimensions[1]});
     yInputField.value = this.location[1];
     yInputField.addEventListener("change", (event)=> {
-      me.location[1] = event.target.value;
+      me.location[1] = parseInt(event.target.value);
       me.game.drawCollisions();
     })
 
@@ -140,14 +143,14 @@ class Thing extends GameContainer {
     var xDimInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'1000'});
     xDimInputField.value = this.dimensions[0];
     xDimInputField.addEventListener("change", (event)=> {
-      me.dimensions[0] = event.target.value;
+      me.dimensions[0] = parseInt(event.target.value);
       me.game.drawCollisions();
     })
 
     var yDimInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'1000'});
     yDimInputField.value = this.dimensions[1];
     yDimInputField.addEventListener("change", (event)=> {
-      me.dimensions[1] = event.target.value;
+      me.dimensions[1] = parseInt(event.target.value);
       me.game.drawCollisions();
     })
 

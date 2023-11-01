@@ -312,7 +312,7 @@
       "triggered": false,
       "location": [
         336,
-        "167"
+        167
       ],
       "dimensions": [
         16,
@@ -378,12 +378,12 @@
       "trigger": false,
       "triggered": false,
       "location": [
-        "0",
-        "40"
+        0,
+        40
       ],
       "dimensions": [
-        "8",
-        "144"
+        8,
+        144
       ],
       "spritePath": "assets/sprites/transparent.png"
     },
@@ -397,12 +397,12 @@
       "trigger": false,
       "triggered": false,
       "location": [
-        "354",
-        "40"
+        354,
+        40
       ],
       "dimensions": [
-        "6",
-        "120"
+        6,
+        120
       ],
       "spritePath": "assets/sprites/transparent.png"
     }
@@ -421,9 +421,9 @@
     ],
     "dimensions": [
       16,
-      16
+      26
     ],
-    "spritePath": "assets/sprites/jane.png"
+    "spritePath": "assets/sprites/morgan.png"
   },
   "scenes": {
     "0": {
