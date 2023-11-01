@@ -1,8 +1,8 @@
 Adventure Game Editor
 #######################
 
-Created by: Kevin Putnam
-Art Credit: D Machin - royalty free art purchased from https://malibudarby.itch.io
+:Created by: Kevin Putnam
+:Art Credit: D Machin - royalty free art purchased from https://malibudarby.itch.io
 
 .. warning::
 
