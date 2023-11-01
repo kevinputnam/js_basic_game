@@ -474,7 +474,7 @@ class Game extends GameContainer {
 
     this.author= data['author'];
 
-    var childData = {'parent':null,'game':this.game};
+    var childData = {'parent':this,'game':this.game};
 
     this.things = {};
     for (const [thing_id,thing_data] of Object.entries(data['things'])){
