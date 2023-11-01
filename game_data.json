@@ -183,6 +183,228 @@
         16
       ],
       "spritePath": "assets/sprites/transparent.png"
+    },
+    "4": {
+      "name": "Museum",
+      "description": "Door to the museum",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Yes",
+            "No"
+          ],
+          "prompt": [
+            "Museum: Do you go in?"
+          ],
+          "variable": "enter_museum",
+          "useValue": true
+        },
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_change_scene",
+              "actions": null,
+              "scene_id": "5",
+              "player_pos": [
+                176,
+                160
+              ]
+            }
+          ],
+          "val1": "`$enter_museum`",
+          "val2": "\"Yes\"",
+          "operator": "=="
+        }
+      ],
+      "id": 4,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        0,
+        0
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "5": {
+      "name": "Return to Starport",
+      "description": "Front door of the Corridor museum",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "2",
+          "player_pos": [
+            0,
+            16
+          ]
+        }
+      ],
+      "id": 5,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        176,
+        176
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "6": {
+      "name": "Hospital",
+      "description": "Entrance to the spaceport medical facility.",
+      "things": [],
+      "actions": [],
+      "id": 6,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        39,
+        32
+      ],
+      "dimensions": [
+        32,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "7": {
+      "name": "Planet Jumper Tavern",
+      "description": "A good place to get a drink or lose a few teeth.",
+      "things": [],
+      "actions": [],
+      "id": 7,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        192,
+        32
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "8": {
+      "name": "Stairs",
+      "description": "Descend to the next level",
+      "things": [],
+      "actions": [],
+      "id": 8,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        336,
+        "167"
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "9": {
+      "name": "Spaceport Map",
+      "description": "A guide to all of the locations at the spaceport",
+      "things": [],
+      "actions": [],
+      "id": 9,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        144,
+        128
+      ],
+      "dimensions": [
+        32,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "10": {
+      "name": "Teleporter",
+      "description": "Jump to the new starport",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "6",
+          "player_pos": [
+            100,
+            100
+          ]
+        }
+      ],
+      "id": 10,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        340,
+        144
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "11": {
+      "name": "West",
+      "description": "The passageway to the West",
+      "things": [],
+      "actions": [],
+      "id": 11,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        "0",
+        "40"
+      ],
+      "dimensions": [
+        "8",
+        "144"
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "12": {
+      "name": "East",
+      "description": "The passageway to the East",
+      "things": [],
+      "actions": [],
+      "id": 12,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        "354",
+        "40"
+      ],
+      "dimensions": [
+        "6",
+        "120"
+      ],
+      "spritePath": "assets/sprites/transparent.png"
     }
   },
   "player": {
@@ -265,7 +487,9 @@
       "description": "A great place to catch a ride to just about anywhere.",
       "things": [
         0,
-        1
+        1,
+        4,
+        10
       ],
       "actions": [
         {
@@ -366,11 +590,9 @@
       "grid_size": null,
       "collisions": {
         "0": [
-          1,
           12
         ],
         "1": [
-          1,
           13
         ],
         "2": [
@@ -747,7 +969,8 @@
           7
         ],
         "18": [
-          22
+          22,
+          7
         ],
         "19": [
           22,
@@ -816,6 +1039,338 @@
           9,
           8,
           7
+        ]
+      }
+    },
+    "5": {
+      "name": "Corridor Museum",
+      "description": "A brief history of the region of space called the Corridor.",
+      "things": [
+        5
+      ],
+      "actions": [],
+      "id": 5,
+      "background": "assets/backgrounds/generic_room.png",
+      "draw_player": true,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "13": [
+          8,
+          7,
+          22,
+          21,
+          20,
+          19,
+          18,
+          17,
+          16,
+          15,
+          14,
+          13,
+          12,
+          11,
+          9,
+          10
+        ],
+        "14": [
+          7,
+          22
+        ],
+        "15": [
+          7,
+          22
+        ],
+        "16": [
+          7,
+          22
+        ],
+        "17": [
+          7,
+          22
+        ],
+        "18": [
+          7,
+          22
+        ],
+        "19": [
+          7,
+          22
+        ],
+        "20": [
+          7,
+          22
+        ],
+        "21": [
+          7,
+          22
+        ],
+        "22": [
+          7
+        ],
+        "23": [
+          7
+        ],
+        "24": [
+          7,
+          22
+        ],
+        "25": [
+          7,
+          22
+        ],
+        "26": [
+          7,
+          22
+        ],
+        "27": [
+          7,
+          22
+        ],
+        "28": [
+          7,
+          22
+        ],
+        "29": [
+          7,
+          22
+        ],
+        "30": [
+          7,
+          22
+        ],
+        "31": [
+          7,
+          22
+        ],
+        "32": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ]
+      }
+    },
+    "6": {
+      "name": "New Starport",
+      "description": "Still a good place to catch a ride anywhere.",
+      "things": [
+        6,
+        7,
+        8,
+        9,
+        11,
+        12
+      ],
+      "actions": [],
+      "id": 6,
+      "background": "assets/backgrounds/new_starport.png",
+      "draw_player": true,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "0": [
+          4,
+          23
+        ],
+        "1": [
+          4,
+          23
+        ],
+        "2": [
+          4,
+          23
+        ],
+        "3": [
+          4,
+          23
+        ],
+        "4": [
+          4,
+          23
+        ],
+        "5": [
+          23
+        ],
+        "6": [
+          23
+        ],
+        "7": [
+          23
+        ],
+        "8": [
+          23
+        ],
+        "9": [
+          4,
+          23
+        ],
+        "10": [
+          4,
+          23
+        ],
+        "11": [
+          4,
+          23
+        ],
+        "12": [
+          4,
+          23
+        ],
+        "13": [
+          4,
+          23
+        ],
+        "14": [
+          4,
+          23
+        ],
+        "15": [
+          4,
+          23
+        ],
+        "16": [
+          4,
+          16,
+          14,
+          15,
+          23
+        ],
+        "17": [
+          4,
+          16,
+          13,
+          12,
+          11,
+          23
+        ],
+        "18": [
+          4,
+          11,
+          23
+        ],
+        "19": [
+          4,
+          11,
+          23
+        ],
+        "20": [
+          4,
+          11,
+          23
+        ],
+        "21": [
+          4,
+          11,
+          23
+        ],
+        "22": [
+          4,
+          16,
+          13,
+          11,
+          12,
+          23
+        ],
+        "23": [
+          4,
+          16,
+          15,
+          14,
+          23
+        ],
+        "24": [
+          23
+        ],
+        "25": [
+          23
+        ],
+        "26": [
+          4,
+          23
+        ],
+        "27": [
+          4,
+          23
+        ],
+        "28": [
+          4,
+          23
+        ],
+        "29": [
+          4,
+          23
+        ],
+        "30": [
+          4,
+          23
+        ],
+        "31": [
+          4,
+          23
+        ],
+        "32": [
+          4,
+          23
+        ],
+        "33": [
+          4,
+          23
+        ],
+        "34": [
+          4,
+          23
+        ],
+        "35": [
+          4,
+          23
+        ],
+        "36": [
+          4,
+          23
+        ],
+        "37": [
+          4,
+          23
+        ],
+        "38": [
+          4,
+          23
+        ],
+        "39": [
+          4,
+          23
+        ],
+        "40": [
+          4,
+          23
+        ],
+        "41": [
+          4,
+          21,
+          22
+        ],
+        "42": [
+          4
+        ],
+        "43": [
+          4
+        ],
+        "44": [
+          4,
+          21
         ]
       }
     }

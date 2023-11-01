@@ -60,16 +60,16 @@ class Game extends GameContainer {
   defaulButtonHandler(key){
     switch (key) {
       case "ArrowDown":
-        this.movePlayer([0,2]);
+        this.movePlayer([0,3]);
         break;
       case "ArrowUp":
-        this.movePlayer([0,-2]);
+        this.movePlayer([0,-3]);
         break;
       case "ArrowLeft":
-        this.movePlayer([-2,0]);
+        this.movePlayer([-3,0]);
         break;
       case "ArrowRight":
-        this.movePlayer([2,0]);
+        this.movePlayer([3,0]);
         break;
       case "a":
         console.log('select');

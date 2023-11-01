@@ -15,6 +15,7 @@ html {
 }
 
 #gameview {
+    overflow: scroll;
     position: absolute;
     left: 10px;
     top:  30px;
