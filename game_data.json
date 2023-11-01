@@ -159,18 +159,28 @@
       "name": "Return to Starport",
       "description": "The front door of the hospital",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "2",
+          "player_pos": [
+            128,
+            112
+          ]
+        }
+      ],
       "id": 3,
       "hidden": false,
       "trigger": false,
       "triggered": false,
       "location": [
-        "176",
-        "176"
+        176,
+        176
       ],
       "dimensions": [
-        "16",
-        "16"
+        16,
+        16
       ],
       "spritePath": "assets/sprites/transparent.png"
     }
