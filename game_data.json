@@ -15,6 +15,12 @@
       "value": "true"
     },
     {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "player_credits",
+      "value": "17"
+    },
+    {
       "name": "Action_change_scene",
       "actions": null,
       "scene_id": 0,
