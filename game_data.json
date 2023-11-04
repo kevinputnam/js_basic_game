@@ -340,7 +340,17 @@
       "name": "Spaceport Map",
       "description": "A guide to all of the locations at the spaceport",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "9",
+          "player_pos": [
+            0,
+            0
+          ]
+        }
+      ],
       "id": 9,
       "hidden": false,
       "trigger": false,
@@ -1957,6 +1967,34 @@
           22
         ]
       }
+    },
+    "9": {
+      "name": "Spaceport Map",
+      "description": "I think you get the picture",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": "6000",
+          "variable": ""
+        },
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "6",
+          "player_pos": [
+            160,
+            106
+          ]
+        }
+      ],
+      "id": 9,
+      "background": "assets/backgrounds/map.png",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {}
     }
   }
 }
