@@ -21,6 +21,12 @@
       "value": "17"
     },
     {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "has_keycard",
+      "value": "false"
+    },
+    {
       "name": "Action_change_scene",
       "actions": null,
       "scene_id": 0,
@@ -475,7 +481,14 @@
       "name": "Madame Lucinda's",
       "description": "Madame Lucinda's Prognostications is full of surprises.",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_set_var",
+          "actions": null,
+          "variable": "has_keycard",
+          "value": "true"
+        }
+      ],
       "id": 14,
       "hidden": false,
       "trigger": false,
@@ -547,7 +560,35 @@
       "name": "Server room",
       "description": "Entrance to the server room.",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "****ACCESS GRANTED****"
+              ]
+            },
+            {
+              "name": "Action_else",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "****ACCESS DENIED****"
+                  ]
+                }
+              ]
+            }
+          ],
+          "val1": "`$has_keycard`",
+          "val2": "true",
+          "operator": "=="
+        }
+      ],
       "id": 17,
       "hidden": false,
       "trigger": false,
