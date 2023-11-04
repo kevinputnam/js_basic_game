@@ -217,7 +217,7 @@
               "scene_id": "5",
               "player_pos": [
                 176,
-                160
+                148
               ]
             }
           ],
@@ -248,10 +248,10 @@
         {
           "name": "Action_change_scene",
           "actions": null,
-          "scene_id": "2",
+          "scene_id": "8",
           "player_pos": [
-            0,
-            16
+            208,
+            96
           ]
         }
       ],
@@ -725,8 +725,8 @@
       "collisions": {}
     },
     "2": {
-      "name": "Starport",
-      "description": "A great place to catch a ride to just about anywhere.",
+      "name": "Old Starport",
+      "description": "Deprecated",
       "things": [
         0,
         1,
