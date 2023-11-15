@@ -27,6 +27,12 @@
       "value": "false"
     },
     {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "has_boardingpass",
+      "value": "false"
+    },
+    {
       "name": "Action_change_scene",
       "actions": null,
       "scene_id": 0,
@@ -139,7 +145,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "2": {
-      "name": "Return to Starport",
+      "name": "Exit Tavern",
       "description": "The door from the tavern back to the starport",
       "things": [],
       "actions": [
@@ -168,7 +174,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "3": {
-      "name": "Return to Starport",
+      "name": "Exit Hospital",
       "description": "The front door of the hospital",
       "things": [],
       "actions": [
@@ -197,7 +203,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "4": {
-      "name": "Museum",
+      "name": "Enter Museum",
       "description": "Door to the museum",
       "things": [],
       "actions": [
@@ -247,7 +253,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "5": {
-      "name": "Return to Starport",
+      "name": "Exit Museum",
       "description": "Front door of the Corridor museum",
       "things": [],
       "actions": [
@@ -276,7 +282,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "6": {
-      "name": "Hospital",
+      "name": "Enter Hospital",
       "description": "Entrance to the spaceport medical facility.",
       "things": [],
       "actions": [
@@ -324,7 +330,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "8": {
-      "name": "Stairs",
+      "name": "Right Stairs",
       "description": "Descend to the next level",
       "things": [],
       "actions": [],
@@ -343,7 +349,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "9": {
-      "name": "Spaceport Map",
+      "name": "View Spaceport Map",
       "description": "A guide to all of the locations at the spaceport",
       "things": [],
       "actions": [
@@ -401,7 +407,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "11": {
-      "name": "West",
+      "name": "Go to Spaceport West",
       "description": "The passageway to the West",
       "things": [],
       "actions": [
@@ -430,7 +436,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "12": {
-      "name": "East",
+      "name": "Go to Spaceport East",
       "description": "The passageway to the East",
       "things": [],
       "actions": [
@@ -459,7 +465,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "13": {
-      "name": "Maynard's Supply Market",
+      "name": "Enter Maynard's Supply",
       "description": "Everything you need plus a few things no one should know you have.",
       "things": [],
       "actions": [],
@@ -478,15 +484,18 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "14": {
-      "name": "Madame Lucinda's",
+      "name": "Enter Madame Lucinda's",
       "description": "Madame Lucinda's Prognostications is full of surprises.",
       "things": [],
       "actions": [
         {
-          "name": "Action_set_var",
+          "name": "Action_change_scene",
           "actions": null,
-          "variable": "has_keycard",
-          "value": "true"
+          "scene_id": "10",
+          "player_pos": [
+            176,
+            152
+          ]
         }
       ],
       "id": 14,
@@ -504,10 +513,18 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "15": {
-      "name": "Talk to Receptionist",
+      "name": "Hospital Receptionist",
       "description": "He's a chatty guy, and he might be able to hook you up.",
       "things": [],
       "actions": [
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "Welcome to the Hospital.",
+            "How can I help you?"
+          ]
+        },
         {
           "name": "Action_menu",
           "actions": null,
@@ -517,7 +534,7 @@
             "Ask about the robot"
           ],
           "prompt": [
-            "Hi! What can I do for you?"
+            "What do you say?"
           ],
           "variable": "reception_conversation",
           "useValue": false
@@ -538,7 +555,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "16": {
-      "name": "Entrance to Comm Center",
+      "name": "Enter Comm Center",
       "description": "Check you messages",
       "things": [],
       "actions": [],
@@ -557,7 +574,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "17": {
-      "name": "Server room",
+      "name": "Enter Restricted Area",
       "description": "Entrance to the server room.",
       "things": [],
       "actions": [
@@ -604,10 +621,40 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "18": {
-      "name": "Boarding area",
+      "name": "Enter Space docks",
       "description": "Gateway to adventure",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "Now you just need to find",
+                "your ship."
+              ]
+            },
+            {
+              "name": "Action_else",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "A boarding pass is required",
+                    "to enter this area."
+                  ]
+                }
+              ]
+            }
+          ],
+          "val1": "`$has_boardingpass`",
+          "val2": "true",
+          "operator": "=="
+        }
+      ],
       "id": 18,
       "hidden": false,
       "trigger": false,
@@ -623,7 +670,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "19": {
-      "name": "Spacer's Guild",
+      "name": "Enter Spacer's Guild",
       "description": "Find a pilot",
       "things": [],
       "actions": [],
@@ -642,7 +689,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "20": {
-      "name": "Go East",
+      "name": "Go East to main spaceport",
       "description": "To main spaceport area",
       "things": [],
       "actions": [
@@ -671,7 +718,7 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "21": {
-      "name": "Go West",
+      "name": "Go West to main spaceport",
       "description": "To main starport area",
       "things": [],
       "actions": [
@@ -696,6 +743,260 @@
       "dimensions": [
         4,
         120
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "22": {
+      "name": "Exit Madame Lucinda's",
+      "description": "",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "6",
+          "player_pos": [
+            263,
+            176
+          ]
+        }
+      ],
+      "id": 22,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        176,
+        176
+      ],
+      "dimensions": [
+        16,
+        8
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "23": {
+      "name": "Madame Lucinda",
+      "description": "Green hair is her thing.",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "Hello, my dear. I am Madame",
+            "Lucinda. How are you today?"
+          ]
+        },
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Been better.",
+            "Feeling groovy.",
+            "Looking for answers.",
+            "Fine and you?"
+          ],
+          "prompt": [
+            "What do you say?"
+          ],
+          "variable": "convo_choice",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Ah, well. I suppose that",
+                    "is always true. Perhaps",
+                    "I can interest you in an",
+                    "energy drink as a pick",
+                    "me up. We have several",
+                    "kinds."
+                  ]
+                },
+                {
+                  "name": "Action_menu",
+                  "actions": null,
+                  "choices": [
+                    "Tiger Piss",
+                    "Green Dragon Haze",
+                    "Jitter",
+                    "I'll pass"
+                  ],
+                  "prompt": [
+                    "Choose an energy drink:"
+                  ],
+                  "variable": "drink_choice",
+                  "useValue": false
+                },
+                {
+                  "name": "Action_switch",
+                  "actions": [
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "It tastes like its name, and",
+                            "doesn't seem to do much.",
+                            "Maybe you just have a high",
+                            "tolerance."
+                          ]
+                        }
+                      ],
+                      "value": "0"
+                    },
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "Your tongue tingles as you",
+                            "drink it down while a veil seems",
+                            "to drop over your eyes causing",
+                            "everyone around you to move",
+                            "with exaggerated slowness.",
+                            ""
+                          ]
+                        },
+                        {
+                          "name": "Action_if_eval",
+                          "actions": [
+                            {
+                              "name": "Action_message",
+                              "actions": null,
+                              "text_lines": [
+                                "Madame Lucinda gazes at you",
+                                "intently. She sees something",
+                                "that causes her to nod sagely.",
+                                "Moving painfully slowly, she",
+                                "reaches under the counter",
+                                "and hands you a key card.",
+                                "\"I think you might find this",
+                                "useful,\" she says."
+                              ]
+                            },
+                            {
+                              "name": "Action_set_var",
+                              "actions": null,
+                              "variable": "has_keycard",
+                              "value": "true"
+                            }
+                          ],
+                          "val1": "`$has_keycard`",
+                          "val2": "false",
+                          "operator": "=="
+                        }
+                      ],
+                      "value": "1"
+                    },
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "Your heart rate monitor logs",
+                            "a near cardiac event."
+                          ]
+                        }
+                      ],
+                      "value": "2"
+                    },
+                    {
+                      "name": "Action_message",
+                      "actions": null,
+                      "text_lines": [
+                        "On second thought, you're",
+                        "probably right. I'm sure there's",
+                        "a reason they were giving them",
+                        "away for free.",
+                        ""
+                      ]
+                    }
+                  ],
+                  "variable": "drink_choice"
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Let's dance!"
+                  ]
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "You've come to the right",
+                    "place! Gaze into my eyes."
+                  ]
+                }
+              ],
+              "value": "2"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Truth be told, I feel",
+                    "rather marvelous. Can",
+                    "I interest you in my",
+                    "prognosticative powers?"
+                  ]
+                }
+              ],
+              "value": "3"
+            },
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "Maybe we can chat another time."
+              ]
+            }
+          ],
+          "variable": "convo_choice"
+        }
+      ],
+      "id": 23,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        208,
+        120
+      ],
+      "dimensions": [
+        24,
+        24
       ],
       "spritePath": "assets/sprites/transparent.png"
     }
@@ -2036,6 +2337,172 @@
       "map_size": [],
       "grid_size": null,
       "collisions": {}
+    },
+    "10": {
+      "name": "Madame Lucinda's",
+      "description": "You never know what she's going to tell you.",
+      "things": [
+        22,
+        23
+      ],
+      "actions": [],
+      "id": 10,
+      "background": "assets/backgrounds/madame_lucindas.png",
+      "draw_player": true,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "13": [
+          22,
+          21,
+          20,
+          19,
+          17,
+          16,
+          15,
+          14,
+          13,
+          11,
+          10,
+          9,
+          7,
+          6,
+          8,
+          18,
+          12
+        ],
+        "14": [
+          22,
+          17,
+          11,
+          6,
+          12,
+          18
+        ],
+        "15": [
+          22,
+          17,
+          18,
+          12,
+          11,
+          6
+        ],
+        "16": [
+          22,
+          6
+        ],
+        "17": [
+          22,
+          6
+        ],
+        "18": [
+          22,
+          6,
+          12,
+          11,
+          10,
+          9,
+          8,
+          7
+        ],
+        "19": [
+          22,
+          6,
+          12,
+          11
+        ],
+        "20": [
+          22,
+          6,
+          10
+        ],
+        "21": [
+          22,
+          6,
+          10
+        ],
+        "22": [
+          6,
+          10,
+          9,
+          8,
+          7
+        ],
+        "23": [
+          6,
+          16,
+          15
+        ],
+        "24": [
+          6,
+          22,
+          17,
+          16,
+          15
+        ],
+        "25": [
+          6,
+          22,
+          17
+        ],
+        "26": [
+          6,
+          22
+        ],
+        "27": [
+          6,
+          22
+        ],
+        "28": [
+          6,
+          22
+        ],
+        "29": [
+          6,
+          22,
+          9,
+          8,
+          7,
+          17
+        ],
+        "30": [
+          6,
+          22,
+          9,
+          15,
+          16,
+          18
+        ],
+        "31": [
+          6,
+          22,
+          9,
+          10,
+          11,
+          16,
+          15,
+          18
+        ],
+        "32": [
+          6,
+          7,
+          8,
+          9,
+          11,
+          10,
+          12,
+          14,
+          13,
+          15,
+          16,
+          18,
+          19,
+          20,
+          21,
+          22,
+          17
+        ]
+      }
     }
   }
 }
