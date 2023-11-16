@@ -884,7 +884,7 @@ class Action_case extends Action {
     var editView = document.getElementById("editview");
 
     var inputLabel = document.createElement('label');
-    inputLabel.innerHTML = "Varlue: ";
+    inputLabel.innerHTML = "Value: ";
     var valueInputField = createElementWithAttributes('input',{'type':'text','maxlength':'25','size':'17'});
     valueInputField.value = this.value;
     valueInputField.addEventListener("change", (event)=> {

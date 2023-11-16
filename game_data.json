@@ -33,6 +33,18 @@
       "value": "false"
     },
     {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "fortune_heard",
+      "value": "false"
+    },
+    {
+      "name": "Action_set_var",
+      "actions": null,
+      "variable": "has_supplies",
+      "value": "false"
+    },
+    {
       "name": "Action_change_scene",
       "actions": null,
       "scene_id": 0,
@@ -538,6 +550,99 @@
           ],
           "variable": "reception_conversation",
           "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_if_eval",
+                  "actions": [
+                    {
+                      "name": "Action_if_eval",
+                      "actions": [
+                        {
+                          "name": "Action_set_var",
+                          "actions": null,
+                          "variable": "player_credits",
+                          "value": "`$player_credits` - 5000"
+                        },
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "Congratulations, the supplies",
+                            "will be delivered to your ship",
+                            "when you are ready to leave.",
+                            "You now have `$player_credits` credits",
+                            "in your account.",
+                            "",
+                            ""
+                          ]
+                        },
+                        {
+                          "name": "Action_set_var",
+                          "actions": null,
+                          "variable": "has_supplies",
+                          "value": "true"
+                        },
+                        {
+                          "name": "Action_else",
+                          "actions": [
+                            {
+                              "name": "Action_message",
+                              "actions": null,
+                              "text_lines": [
+                                "The supplies you need cost",
+                                "5000 credits, and you only",
+                                "have `$player_credits` in your",
+                                "account."
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "val1": "`$player_credits`",
+                      "val2": "5000",
+                      "operator": ">="
+                    },
+                    {
+                      "name": "Action_else",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "It was good doing business with",
+                            "you. Don't forget your supplies",
+                            "will be delivered to your ship",
+                            "when you're ready to leave."
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "val1": "`$has_supplies`",
+                  "val2": "false",
+                  "operator": "=="
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [],
+              "value": "2"
+            }
+          ],
+          "variable": "reception_conversation"
         }
       ],
       "id": 15,
@@ -781,6 +886,12 @@
       "things": [],
       "actions": [
         {
+          "name": "Action_set_var",
+          "actions": null,
+          "variable": "get_fortune",
+          "value": "false"
+        },
+        {
           "name": "Action_message",
           "actions": null,
           "text_lines": [
@@ -874,24 +985,32 @@
                           "name": "Action_if_eval",
                           "actions": [
                             {
-                              "name": "Action_message",
-                              "actions": null,
-                              "text_lines": [
-                                "Madame Lucinda gazes at you",
-                                "intently. She sees something",
-                                "that causes her to nod sagely.",
-                                "Moving painfully slowly, she",
-                                "reaches under the counter",
-                                "and hands you a key card.",
-                                "\"I think you might find this",
-                                "useful,\" she says."
-                              ]
-                            },
-                            {
-                              "name": "Action_set_var",
-                              "actions": null,
-                              "variable": "has_keycard",
-                              "value": "true"
+                              "name": "Action_if_eval",
+                              "actions": [
+                                {
+                                  "name": "Action_set_var",
+                                  "actions": null,
+                                  "variable": "has_keycard",
+                                  "value": "true"
+                                },
+                                {
+                                  "name": "Action_message",
+                                  "actions": null,
+                                  "text_lines": [
+                                    "Madame Lucinda gazes at you",
+                                    "intently. She sees something",
+                                    "that causes her to nod sagely.",
+                                    "Moving painfully slowly, she",
+                                    "reaches under the counter",
+                                    "and hands you a key card.",
+                                    "\"I think you might find this",
+                                    "useful,\" she says."
+                                  ]
+                                }
+                              ],
+                              "val1": "`$fortune_heard`",
+                              "val2": "true",
+                              "operator": "=="
                             }
                           ],
                           "val1": "`$has_keycard`",
@@ -955,6 +1074,12 @@
                     "You've come to the right",
                     "place! Gaze into my eyes."
                   ]
+                },
+                {
+                  "name": "Action_set_var",
+                  "actions": null,
+                  "variable": "get_fortune",
+                  "value": "true"
                 }
               ],
               "value": "2"
@@ -971,6 +1096,47 @@
                     "I interest you in my",
                     "prognosticative powers?"
                   ]
+                },
+                {
+                  "name": "Action_menu",
+                  "actions": null,
+                  "choices": [
+                    "Yes",
+                    "No"
+                  ],
+                  "prompt": [
+                    "Listen to your fortune?"
+                  ],
+                  "variable": "fortune_choice",
+                  "useValue": false
+                },
+                {
+                  "name": "Action_if_eval",
+                  "actions": [
+                    {
+                      "name": "Action_set_var",
+                      "actions": null,
+                      "variable": "get_fortune",
+                      "value": "true"
+                    },
+                    {
+                      "name": "Action_else",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "\"I understand completely, my",
+                            "dear,\" she says looking at you",
+                            "knowingly. \"Maybe another time.\""
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "val1": "`$fortune_choice`",
+                  "val2": "0",
+                  "operator": "=="
                 }
               ],
               "value": "3"
@@ -984,6 +1150,89 @@
             }
           ],
           "variable": "convo_choice"
+        },
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_if_eval",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Madame Lucinda's eyes roll back",
+                    "into her head. Looking down, you",
+                    "see her gnarled hands, the",
+                    "numerous silver rings on her",
+                    "fingers, her manicured nails.",
+                    "You can't help but think that",
+                    "she must be pretty well off.",
+                    ""
+                  ]
+                },
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "After a long moment, where all",
+                    "you could hear is the rattle of",
+                    "the environmental system,",
+                    "Madame Lucinda begins to",
+                    "speak."
+                  ]
+                },
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "\"I see a great adventure ahead",
+                    "of you,\" she intones. \"It will",
+                    "take you far across the galaxy.",
+                    "Be warned. It won't be easy. But",
+                    "the dragon will grant you a boon",
+                    "if only you ask.\"",
+                    ""
+                  ]
+                },
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Her eyes return to normal",
+                    "and she smiles at you shakily.",
+                    "\"Hmm. Have a lovely day,",
+                    "dear.\""
+                  ]
+                },
+                {
+                  "name": "Action_set_var",
+                  "actions": null,
+                  "variable": "fortune_heard",
+                  "value": "true"
+                },
+                {
+                  "name": "Action_else",
+                  "actions": [
+                    {
+                      "name": "Action_message",
+                      "actions": null,
+                      "text_lines": [
+                        "I'm afraid the spirits refuse",
+                        "to speak to me right now."
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "val1": "`$fortune_heard`",
+              "val2": "false",
+              "operator": "=="
+            }
+          ],
+          "val1": "`$get_fortune`",
+          "val2": "true",
+          "operator": "=="
         }
       ],
       "id": 23,
