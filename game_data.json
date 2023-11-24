@@ -265,18 +265,69 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "5": {
-      "name": "Exit Museum",
-      "description": "Front door of the Corridor museum",
+      "name": "Use Terminal",
+      "description": "It's a terminal",
       "things": [],
       "actions": [
         {
-          "name": "Action_change_scene",
+          "name": "Action_menu",
           "actions": null,
-          "scene_id": "8",
-          "player_pos": [
-            208,
-            96
-          ]
+          "choices": [
+            "1: Storage status",
+            "2: Submit requisition",
+            "3: Billing",
+            "4: Exit"
+          ],
+          "prompt": [
+            "Make a selection:"
+          ],
+          "variable": "terminal_selection",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Storage Status"
+                  ]
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Submit Requisition"
+                  ]
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "Billing"
+                  ]
+                }
+              ],
+              "value": "2"
+            }
+          ],
+          "variable": "terminal_selection"
         }
       ],
       "id": 5,
@@ -284,12 +335,12 @@
       "trigger": false,
       "triggered": false,
       "location": [
-        176,
-        176
+        224,
+        112
       ],
       "dimensions": [
         16,
-        16
+        2
       ],
       "spritePath": "assets/sprites/transparent.png"
     },
@@ -415,6 +466,15 @@
                   "actions": null,
                   "text_lines": [
                     "Environmental selected"
+                  ]
+                },
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "17",
+                  "player_pos": [
+                    180,
+                    64
                   ]
                 }
               ],
@@ -741,7 +801,17 @@
       "name": "Enter Comm Center",
       "description": "Check you messages",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "13",
+          "player_pos": [
+            176,
+            58
+          ]
+        }
+      ],
       "id": 16,
       "hidden": false,
       "trigger": false,
@@ -768,7 +838,9 @@
               "name": "Action_message",
               "actions": null,
               "text_lines": [
-                "****ACCESS GRANTED****"
+                "    LOWER DECKS",
+                "****ACCESS GRANTED****",
+                ""
               ]
             },
             {
@@ -1337,23 +1409,31 @@
       "spritePath": "assets/sprites/transparent.png"
     },
     "24": {
-      "name": "Elevator",
-      "description": "",
+      "name": "Comm Terminal 1 & 2",
+      "description": "Use the computer",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "Welcome to Galactic Telecom"
+          ]
+        }
+      ],
       "id": 24,
       "hidden": false,
       "trigger": false,
       "triggered": false,
       "location": [
-        158,
-        102
+        162,
+        96
       ],
       "dimensions": [
-        44,
-        36
+        28,
+        2
       ],
-      "spritePath": "assets/sprites/elevator.png"
+      "spritePath": "assets/sprites/transparent.png"
     },
     "25": {
       "name": "Enter elevator",
@@ -1381,6 +1461,119 @@
       "dimensions": [
         16,
         8
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "26": {
+      "name": "Door to starport east",
+      "description": "",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "8",
+          "player_pos": [
+            80,
+            148
+          ]
+        }
+      ],
+      "id": 26,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        176,
+        48
+      ],
+      "dimensions": [
+        16,
+        8
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "27": {
+      "name": "Comm Terminals 3 & 4",
+      "description": "Out of service",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "This terminal is",
+            "OUT OF SERVICE"
+          ]
+        }
+      ],
+      "id": 27,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        162,
+        136
+      ],
+      "dimensions": [
+        28,
+        2
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "28": {
+      "name": "Enter elevator",
+      "description": "",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "11",
+          "player_pos": [
+            172,
+            109
+          ]
+        }
+      ],
+      "id": 28,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        184,
+        48
+      ],
+      "dimensions": [
+        16,
+        8
+      ],
+      "spritePath": "assets/sprites/transparent.png"
+    },
+    "29": {
+      "name": "Environmental controls",
+      "description": "",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "Environmental controls"
+          ]
+        }
+      ],
+      "id": 29,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        144,
+        136
+      ],
+      "dimensions": [
+        16,
+        2
       ],
       "spritePath": "assets/sprites/transparent.png"
     }
@@ -2041,122 +2234,122 @@
     "5": {
       "name": "Corridor Museum",
       "description": "A brief history of the region of space called the Corridor.",
-      "things": [
-        5
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": "3500",
+          "variable": ""
+        },
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "The Factions",
+            "First Contact",
+            "The Corridor",
+            "Exit"
+          ],
+          "prompt": [
+            "Table of Contents"
+          ],
+          "variable": "chapter_selection",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "14",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "15",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "16",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "2"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "8",
+                  "player_pos": [
+                    208,
+                    96
+                  ]
+                }
+              ],
+              "value": "3"
+            }
+          ],
+          "variable": "chapter_selection"
+        }
       ],
-      "actions": [],
       "id": 5,
-      "background": "assets/backgrounds/generic_room.png",
-      "draw_player": true,
+      "background": "assets/backgrounds/museum_scene1.png",
+      "draw_player": false,
       "map_size": [],
       "grid_size": null,
       "collisions": {
-        "13": [
-          8,
-          7,
-          22,
-          21,
-          20,
-          19,
-          18,
-          17,
-          16,
-          15,
-          14,
-          13,
-          12,
-          11,
-          9,
-          10
-        ],
-        "14": [
-          7,
-          22
-        ],
-        "15": [
-          7,
-          22
-        ],
-        "16": [
-          7,
-          22
-        ],
-        "17": [
-          7,
-          22
-        ],
-        "18": [
-          7,
-          22
-        ],
-        "19": [
-          7,
-          22
-        ],
-        "20": [
-          7,
-          22
-        ],
-        "21": [
-          7,
-          22
-        ],
-        "22": [
-          7
-        ],
-        "23": [
-          7
-        ],
-        "24": [
-          7,
-          22
-        ],
-        "25": [
-          7,
-          22
-        ],
-        "26": [
-          7,
-          22
-        ],
-        "27": [
-          7,
-          22
-        ],
-        "28": [
-          7,
-          22
-        ],
-        "29": [
-          7,
-          22
-        ],
-        "30": [
-          7,
-          22
-        ],
-        "31": [
-          7,
-          22
-        ],
-        "32": [
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22
-        ]
+        "13": [],
+        "14": [],
+        "15": [],
+        "16": [],
+        "17": [],
+        "18": [],
+        "19": [],
+        "20": [],
+        "21": [],
+        "22": [],
+        "23": [],
+        "24": [],
+        "25": [],
+        "26": [],
+        "27": [],
+        "28": [],
+        "29": [],
+        "30": [],
+        "31": [],
+        "32": []
       }
     },
     "6": {
@@ -2350,8 +2543,7 @@
         "32": [
           19,
           2,
-          18,
-          12
+          18
         ],
         "33": [
           19,
@@ -2361,8 +2553,7 @@
         "34": [
           19,
           2,
-          18,
-          14
+          18
         ],
         "35": [
           2,
@@ -2947,7 +3138,8 @@
       "name": "Spaceport Server Room",
       "description": "",
       "things": [
-        25
+        25,
+        5
       ],
       "actions": [],
       "id": 12,
@@ -3013,7 +3205,8 @@
           19,
           18,
           12,
-          13
+          13,
+          20
         ],
         "21": [
           7,
@@ -3087,6 +3280,561 @@
           11,
           12,
           13
+        ]
+      }
+    },
+    "13": {
+      "name": "Comm Center",
+      "description": "Check your messages",
+      "things": [
+        26,
+        24,
+        27
+      ],
+      "actions": [],
+      "id": 13,
+      "background": "assets/backgrounds/comm_center.png",
+      "draw_player": true,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "13": [],
+        "15": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          10,
+          9
+        ],
+        "16": [
+          17,
+          22,
+          9
+        ],
+        "17": [
+          6,
+          7,
+          8,
+          9,
+          22
+        ],
+        "18": [
+          6,
+          22
+        ],
+        "19": [
+          6,
+          22
+        ],
+        "20": [
+          6,
+          22,
+          11,
+          16
+        ],
+        "21": [
+          22,
+          6,
+          11,
+          16
+        ],
+        "22": [
+          22,
+          11,
+          16
+        ],
+        "23": [
+          22,
+          11,
+          16
+        ],
+        "24": [
+          22,
+          6
+        ],
+        "25": [
+          6,
+          22
+        ],
+        "26": [
+          6,
+          22
+        ],
+        "27": [
+          6,
+          7,
+          8,
+          9,
+          22
+        ],
+        "28": [
+          22,
+          9
+        ],
+        "29": [
+          11,
+          12,
+          13,
+          14,
+          22,
+          9,
+          10
+        ],
+        "30": [
+          17,
+          22,
+          16,
+          15
+        ],
+        "31": [
+          17,
+          22
+        ],
+        "32": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "37": [],
+        "38": []
+      }
+    },
+    "14": {
+      "name": "The Factions",
+      "description": "History of the factions",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": "3500",
+          "variable": ""
+        },
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Introduction",
+            "First Contact",
+            "The Corridor",
+            "Exit"
+          ],
+          "prompt": [
+            "Table of Contents"
+          ],
+          "variable": "chapter_selection",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "5",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "15",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "16",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "2"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "8",
+                  "player_pos": [
+                    208,
+                    96
+                  ]
+                }
+              ],
+              "value": "3"
+            }
+          ],
+          "variable": "chapter_selection"
+        }
+      ],
+      "id": 14,
+      "background": "assets/backgrounds/the_factions.png",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {}
+    },
+    "15": {
+      "name": "First Contact",
+      "description": "",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": "3500",
+          "variable": ""
+        },
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Introduction",
+            "The Factions",
+            "The Corridor",
+            "Exit"
+          ],
+          "prompt": [
+            "Table of Contents"
+          ],
+          "variable": "chapter_selection",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "5",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "14",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "16",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "2"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "8",
+                  "player_pos": [
+                    208,
+                    96
+                  ]
+                }
+              ],
+              "value": "3"
+            }
+          ],
+          "variable": "chapter_selection"
+        }
+      ],
+      "id": 15,
+      "background": "assets/backgrounds/first_contact.png",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {}
+    },
+    "16": {
+      "name": "The Corridor",
+      "description": "",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_start_timer",
+          "actions": null,
+          "milliseconds": "3500",
+          "variable": ""
+        },
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Introduction",
+            "The Factions",
+            "First Contact",
+            "Exit"
+          ],
+          "prompt": [
+            "Table of Contents"
+          ],
+          "variable": "chapter_selection",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "5",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "14",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "1"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "15",
+                  "player_pos": [
+                    0,
+                    0
+                  ]
+                }
+              ],
+              "value": "2"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_change_scene",
+                  "actions": null,
+                  "scene_id": "8",
+                  "player_pos": [
+                    208,
+                    96
+                  ]
+                }
+              ],
+              "value": "3"
+            }
+          ],
+          "variable": "chapter_selection"
+        }
+      ],
+      "id": 16,
+      "background": "assets/backgrounds/the_corridor.png",
+      "draw_player": false,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "5": []
+      }
+    },
+    "17": {
+      "name": "Environmental",
+      "description": "It doesn't smell good",
+      "things": [
+        28,
+        29
+      ],
+      "actions": [],
+      "id": 17,
+      "background": "assets/backgrounds/environmental.png",
+      "draw_player": true,
+      "map_size": [],
+      "grid_size": null,
+      "collisions": {
+        "13": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          22,
+          21,
+          15,
+          13,
+          14
+        ],
+        "14": [
+          22,
+          13
+        ],
+        "15": [
+          8,
+          13,
+          11,
+          10,
+          22,
+          12,
+          9
+        ],
+        "16": [
+          8,
+          22
+        ],
+        "17": [
+          8,
+          22
+        ],
+        "18": [
+          8,
+          16,
+          22
+        ],
+        "19": [
+          8,
+          16,
+          22
+        ],
+        "20": [
+          6,
+          7,
+          8,
+          22
+        ],
+        "21": [
+          6,
+          22
+        ],
+        "22": [
+          6,
+          22
+        ],
+        "23": [
+          22
+        ],
+        "24": [
+          22
+        ],
+        "25": [
+          6,
+          22
+        ],
+        "26": [
+          6,
+          22
+        ],
+        "27": [
+          6,
+          22
+        ],
+        "28": [
+          15,
+          14,
+          13,
+          11,
+          12,
+          10,
+          9,
+          8,
+          6,
+          7,
+          16,
+          22,
+          17
+        ],
+        "29": [
+          22,
+          17
+        ],
+        "30": [
+          22,
+          18
+        ],
+        "31": [
+          22,
+          18
+        ],
+        "32": [
+          18,
+          19,
+          20,
+          21,
+          22
         ]
       }
     }
