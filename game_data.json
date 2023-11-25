@@ -679,7 +679,7 @@
           "name": "Action_menu",
           "actions": null,
           "choices": [
-            "Just chat",
+            "Ask about starport",
             "Ask about medical supplies",
             "Ask about the robot"
           ],
@@ -694,7 +694,27 @@
           "actions": [
             {
               "name": "Action_case",
-              "actions": [],
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "I'm new to the starport. Can",
+                    "you help me find my way",
+                    "around?"
+                  ]
+                },
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "There's a map in the middle",
+                    "of the concourse. That should",
+                    "help you figure out where things",
+                    "are."
+                  ]
+                }
+              ],
               "value": "0"
             },
             {
@@ -720,9 +740,7 @@
                             "will be delivered to your ship",
                             "when you are ready to leave.",
                             "You now have `$player_credits` credits",
-                            "in your account.",
-                            "",
-                            ""
+                            "in your account."
                           ]
                         },
                         {
@@ -776,7 +794,94 @@
             },
             {
               "name": "Action_case",
-              "actions": [],
+              "actions": [
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "What's the deal with your",
+                    "robot? It looks dangerous."
+                  ]
+                },
+                {
+                  "name": "Action_message",
+                  "actions": null,
+                  "text_lines": [
+                    "This guy? Nah, it's a teddy",
+                    "bear... Well, as long as you",
+                    "make no sudden moves and",
+                    "aren't at all threatening. So,",
+                    "I guess it is pretty dangerous.",
+                    ""
+                  ]
+                },
+                {
+                  "name": "Action_menu",
+                  "actions": null,
+                  "choices": [
+                    "Makes sense, I guess.",
+                    "Wish I had one.",
+                    "I don't trust robots."
+                  ],
+                  "prompt": [
+                    "What do you say?"
+                  ],
+                  "variable": "convo_choice",
+                  "useValue": false
+                },
+                {
+                  "name": "Action_switch",
+                  "actions": [
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "Just between you and me,",
+                            "it does make me a little",
+                            "nervous some times."
+                          ]
+                        }
+                      ],
+                      "value": "0"
+                    },
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "You can't have this one. I'm",
+                            "pretty sure it would run you",
+                            "a million credits."
+                          ]
+                        }
+                      ],
+                      "value": "1"
+                    },
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "The robot turns to you and",
+                            "says, \"Consider your next words",
+                            "carefully ... Just kidding. Have",
+                            "a nice day.\""
+                          ]
+                        }
+                      ],
+                      "value": "2"
+                    }
+                  ],
+                  "variable": "convo_choice"
+                }
+              ],
               "value": "2"
             }
           ],
@@ -1417,7 +1522,10 @@
           "name": "Action_message",
           "actions": null,
           "text_lines": [
-            "Welcome to Galactic Telecom"
+            "Welcome to Galactic Telecom",
+            "",
+            "Your credit balance: `$player_credits`",
+            ""
           ]
         }
       ],
@@ -2364,7 +2472,36 @@
         13,
         14
       ],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_message",
+              "actions": null,
+              "text_lines": [
+                "You are at the Starport",
+                "",
+                "Objectives:",
+                "  1. Get medical supplies",
+                "  2. Secure travel to Bella Luna",
+                "",
+                "Your credit balance: `$player_credits`",
+                "View progress at the comm center"
+              ]
+            },
+            {
+              "name": "Action_set_var",
+              "actions": null,
+              "variable": "starport_first_visit",
+              "value": "false"
+            }
+          ],
+          "val1": "`$starport_first_visit`",
+          "val2": "true",
+          "operator": "=="
+        }
+      ],
       "id": 6,
       "background": "assets/backgrounds/new_starport.png",
       "draw_player": true,
