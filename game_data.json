@@ -871,8 +871,14 @@
                           "text_lines": [
                             "The robot turns to you and",
                             "says, \"Consider your next words",
-                            "carefully ... Just kidding. Have",
-                            "a nice day.\""
+                            "carefully.\""
+                          ]
+                        },
+                        {
+                          "name": "Action_message",
+                          "actions": null,
+                          "text_lines": [
+                            "\"Just kidding. Have a nice day.\""
                           ]
                         }
                       ],
@@ -1519,12 +1525,56 @@
       "things": [],
       "actions": [
         {
+          "name": "Action_set_var",
+          "actions": null,
+          "variable": "bp",
+          "value": "\"No\""
+        },
+        {
+          "name": "Action_set_var",
+          "actions": null,
+          "variable": "sp",
+          "value": "\"No\""
+        },
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_set_var",
+              "actions": null,
+              "variable": "sp",
+              "value": "\"Yes\""
+            }
+          ],
+          "val1": "`$has_supplies`",
+          "val2": "true",
+          "operator": "=="
+        },
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_set_var",
+              "actions": null,
+              "variable": "bp",
+              "value": "\"Yes\""
+            }
+          ],
+          "val1": "`$has_boardingpass`",
+          "val2": "true",
+          "operator": "=="
+        },
+        {
           "name": "Action_message",
           "actions": null,
           "text_lines": [
             "Welcome to Galactic Telecom",
             "",
+            "1. Boarding pass? `$bp`",
+            "2. Medical supplies? `$sp`",
+            "",
             "Your credit balance: `$player_credits`",
+            "",
             ""
           ]
         }
