@@ -1573,9 +1573,7 @@
             "1. Boarding pass? `$bp`",
             "2. Medical supplies? `$sp`",
             "",
-            "Your credit balance: `$player_credits`",
-            "",
-            ""
+            "Your credit balance: `$player_credits`"
           ]
         }
       ],
