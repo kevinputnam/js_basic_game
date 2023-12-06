@@ -46,14 +46,14 @@ class Game extends GameContainer {
 
   chooseButtonHandler(key){
     switch(this.buttonEventHandler){
-    case "message":
-      this.messageButtonHandler(key);
-      break;
-    case "menu":
-      this.menuButtonHandler(key);
-      break;
-    default:
-      this.defaulButtonHandler(key);
+      case "message":
+        this.messageButtonHandler(key);
+        break;
+      case "menu":
+        this.menuButtonHandler(key);
+        break;
+      default:
+        console.log("default");
     }
   }
 
@@ -61,42 +61,59 @@ class Game extends GameContainer {
     if (event.defaultPrevented){
       return;
     }
-    if(this.controlKeys.includes(event.key)){
-      if (event.type == "keydown"){
-        this.controller[event.key]=true;
-        if (this.buttonEventHandler == "message" || this.buttonEventHandler =="menu"){
-          this.controller[event.key] = false;
-          this.chooseButtonHandler(event.key);
+    if(this.buttonEventHandler == 'default'){
+      if(this.controlKeys.includes(event.key)){
+        if (event.type == "keydown"){
+          this.controller[event.key]=true;
+        }else{
+          this.controller[event.key]=false;
         }
-      }else{
-        this.controller[event.key]=false;
+      }
+    }else{
+      this.controller[event.key] = false;
+      if(event.type == "keydown"){
+        this.chooseButtonHandler(event.key);
       }
     }
     event.preventDefault();
   }
 
-  defaulButtonHandler(key){
-    switch (key) {
-      case "ArrowDown":
-        this.movePlayer([0,3]);
-        break;
-      case "ArrowUp":
-        this.movePlayer([0,-3]);
-        break;
-      case "ArrowLeft":
-        this.movePlayer([-3,0]);
-        break;
-      case "ArrowRight":
-        this.movePlayer([3,0]);
-        break;
-      case "a":
-        console.log('select');
-        break;
-      case "s":
-        console.log('dismiss');
-        break;
-      default:
-        return; // Quit when this doesn't handle the key event.
+  defaultButtonHandler(keys){
+    var player_move = [0,0]
+    for (const [key,pressed] of Object.entries(keys)){
+      if (pressed){
+        switch (key) {
+          case "ArrowDown":
+            player_move[1] += 1;
+            break;
+          case "ArrowUp":
+            player_move[1] -= 1;
+            break;
+          case "ArrowLeft":
+            player_move[0] -= 1;
+            break;
+          case "ArrowRight":
+            player_move[0] += 1;
+            break;
+          case "a":
+            console.log('select');
+            break;
+          case "s":
+            console.log('dismiss');
+            break;
+          default:
+            console.log('nothing');
+        }
+      }
+    }
+    var moveLength = 3;
+    if (player_move[0] != 0 && player_move[1] != 0){
+      moveLength = parseInt(moveLength * 0.7071);
+    }
+    player_move[0] = player_move[0] * moveLength;
+    player_move[1] = player_move[1] * moveLength;
+    if (this.currentScene){
+      this.movePlayer(player_move);
     }
   }
 
@@ -178,18 +195,14 @@ class Game extends GameContainer {
   }
 
   stackRunner(){
-    for(const [key,pressed] of Object.entries(this.controller)){
-      if(pressed){
-        this.chooseButtonHandler(key);
-      }
+    if (this.buttonEventHandler == 'default'){
+      this.defaultButtonHandler(this.controller);
     }
     if(!this.runStackPaused){
       if (this.runStack.length > 0){
         this.currentAction = this.runStack.shift();
         this.currentAction.run();
-      }//else{
-       // this.stop();
-      //}
+      }
     }
     this.updatePlayView();
 

@@ -703,8 +703,6 @@ class Action_if_eval extends Action {
   run(){
     var val1 =this.replaceVariables(this.val1);
     var val2 = this.replaceVariables(this.val2);
-    console.log(val1);
-    console.log(val2);
     if (eval(val1+this.operator+val2)){
         this.game.runStackInsert(this.actions);
     } else {
