@@ -34,27 +34,41 @@ class Game extends GameContainer {
     this.buttonEventHandler = "default";
     this.player = new Player({'parent':null,'game':this.game});
     this.collisionListener = null;
+    this.controller = {
+      "ArrowDown": false,
+      "ArrowUp": false,
+      "ArrowLeft": false,
+      "ArrowRight": false,
+      "a": false,
+      "s": false
+    }
+  }
+
+  chooseButtonHandler(key){
+    switch(this.buttonEventHandler){
+    case "message":
+      this.messageButtonHandler(key);
+      break;
+    case "menu":
+      this.menuButtonHandler(key);
+      break;
+    default:
+      this.defaulButtonHandler(key);
+    }
   }
 
   handleEvent(event){
-    if (event.type == "keydown"){
-      if (event.defaultPrevented){
-        return;
-      }
-      if(this.controlKeys.includes(event.key)){
-        switch(this.buttonEventHandler){
-        case "message":
-          this.messageButtonHandler(event.key);
-          break;
-        case "menu":
-          this.menuButtonHandler(event.key);
-          break;
-        default:
-          this.defaulButtonHandler(event.key);
-        }
-      }
-      event.preventDefault();
+    if (event.defaultPrevented){
+      return;
     }
+    if(this.controlKeys.includes(event.key)){
+      if (event.type == "keydown"){
+        this.controller[event.key]=true;
+      }else{
+        this.controller[event.key]=false;
+      }
+    }
+    event.preventDefault();
   }
 
   defaulButtonHandler(key){
@@ -83,12 +97,14 @@ class Game extends GameContainer {
   }
 
   messageButtonHandler(key){
+    this.controller[key]=false;
     if (key == 's' || key == 'a'){
       this.dismissMessage();
     }
   }
 
   menuButtonHandler(key){
+    this.controller[key]=false;
     switch (key) {
       case "ArrowDown":
         if(this.menuSelectorIndex < this.menuChoices.length -1){
@@ -130,6 +146,7 @@ class Game extends GameContainer {
     }
 
     window.addEventListener("keydown", this, false);
+    window.addEventListener("keyup",this,false);
 
     this.running = true;
     this.runStack = this.runStack.concat(this.actions);
@@ -159,6 +176,11 @@ class Game extends GameContainer {
   }
 
   stackRunner(){
+    for(const [key,pressed] of Object.entries(this.controller)){
+      if(pressed){
+        this.chooseButtonHandler(key);
+      }
+    }
     if(!this.runStackPaused){
       if (this.runStack.length > 0){
         this.currentAction = this.runStack.shift();
