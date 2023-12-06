@@ -464,6 +464,7 @@ class Action_menu extends Action {
     for (const line of this.prompt){
       promptText += line + "\n";
     }
+    promptText = promptText.trim();
 
     var promptInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'25'});
     promptInputField.value = promptText;
@@ -493,6 +494,7 @@ class Action_menu extends Action {
     for (const line of this.choices){
       text += line + "\n";
     }
+    text = text.trim();
 
     menuInputField.value = text;
     menuInputField.addEventListener("change", (event)=> {
@@ -559,6 +561,7 @@ class Action_message extends Action {
     for (const line of this.text_lines){
       text += line + "\n";
     }
+    text = text.trim();
 
     messageInputField.value = text;
     messageInputField.addEventListener("change", (event)=> {
