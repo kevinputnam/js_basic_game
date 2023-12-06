@@ -64,6 +64,10 @@ class Game extends GameContainer {
     if(this.controlKeys.includes(event.key)){
       if (event.type == "keydown"){
         this.controller[event.key]=true;
+        if (this.buttonEventHandler == "message" || this.buttonEventHandler =="menu"){
+          this.controller[event.key] = false;
+          this.chooseButtonHandler(event.key);
+        }
       }else{
         this.controller[event.key]=false;
       }
@@ -97,14 +101,12 @@ class Game extends GameContainer {
   }
 
   messageButtonHandler(key){
-    this.controller[key]=false;
     if (key == 's' || key == 'a'){
       this.dismissMessage();
     }
   }
 
   menuButtonHandler(key){
-    this.controller[key]=false;
     switch (key) {
       case "ArrowDown":
         if(this.menuSelectorIndex < this.menuChoices.length -1){
@@ -246,7 +248,12 @@ class Game extends GameContainer {
           //run the thing and don't overlap it
           newLoc[0] = this.player.location[0];
           newLoc[1] = this.player.location[1];
-          this.things[thing_id].run();
+          if (!this.things[thing_id].triggered){
+            this.things[thing_id].run();
+            this.things[thing_id].triggered = true;
+          }
+        }else{
+          this.things[thing_id].triggered = false;
         }
       }
       const collDim = this.currentScene.collisionDimensions;
