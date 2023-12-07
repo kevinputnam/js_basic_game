@@ -35,6 +35,7 @@ class Game extends GameContainer {
     this.player = new Player({'parent':null,'game':this.game});
     this.player_direction = "down";
     this.player_moved = false;
+    this.animation_counter = 0;
     this.collisionListener = null;
     this.controller = {
       "ArrowDown": false,
@@ -112,7 +113,7 @@ class Game extends GameContainer {
         }
       }
     }
-    var moveLength = 3;
+    var moveLength = 1;
     if (player_move[0] != 0 || player_move[1] != 0){
       this.player_moved = true;
     }
@@ -200,7 +201,7 @@ class Game extends GameContainer {
   }
 
   loop(){
-    setTimeout(() => this.stackRunner(),25);
+    setTimeout(() => this.stackRunner(),12);
   }
 
   stackRunner(){
@@ -340,8 +341,12 @@ class Game extends GameContainer {
         }
         var currentFrame = this.player.currentFrame;
         if(this.player_moved){
-          this.player.currentFrame += 1;
-          this.player_moved = false;
+          if(this.animation_counter > 2){
+            this.player.currentFrame += 1;
+            this.player_moved = false;
+            this.animation_counter = 0;
+          }
+          this.animation_counter += 1;
         }
         this.playContext.drawImage(this.player.spriteImage, animation[currentFrame][1] * spriteWidth, spriteHeight * animation[currentFrame][0], spriteWidth, spriteHeight, this.player.location[0], this.player.location[1], spriteWidth, spriteHeight);
 

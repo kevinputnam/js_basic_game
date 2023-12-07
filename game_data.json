@@ -209,11 +209,11 @@
       "triggered": false,
       "location": [
         168,
-        176
+        180
       ],
       "dimensions": [
         32,
-        8
+        4
       ],
       "spritePath": "assets/sprites/transparent.png",
       "animate": false
@@ -259,11 +259,11 @@
       "trigger": false,
       "triggered": false,
       "location": [
-        224,
+        228,
         96
       ],
       "dimensions": [
-        8,
+        4,
         32
       ],
       "spritePath": "assets/sprites/transparent.png",
@@ -945,11 +945,11 @@
       "triggered": false,
       "location": [
         72,
-        176
+        180
       ],
       "dimensions": [
         32,
-        8
+        4
       ],
       "spritePath": "assets/sprites/transparent.png",
       "animate": false
@@ -1793,7 +1793,7 @@
         ],
         [
           3,
-          0
+          1
         ],
         [
           3,
@@ -1821,7 +1821,7 @@
         ],
         [
           1,
-          0
+          1
         ],
         [
           1,
@@ -1835,7 +1835,7 @@
         ],
         [
           2,
-          0
+          1
         ],
         [
           2,
@@ -3269,7 +3269,6 @@
           10
         ],
         "21": [
-          22,
           6,
           10
         ],
@@ -3287,7 +3286,6 @@
         ],
         "24": [
           6,
-          22,
           17,
           16,
           15
