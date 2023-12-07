@@ -258,8 +258,14 @@ class Game extends GameContainer {
       }
 
       //process thing interactions
-      const p_loc = newLoc;
+      const p_loc = [0,0];
+      p_loc[0] = newLoc[0];
+      p_loc[1] = newLoc[1];
       const p_dim = this.player.dimensions;
+      var px_offset = parseInt((this.player.spriteDim[0] - p_dim[0])/2);
+      var py_offset = parseInt((this.player.spriteDim[1] - p_dim[1])/2);
+      p_loc[0] += px_offset;
+      p_loc[1] += py_offset;
       var player_rect = [p_loc[0],p_loc[1],p_loc[0]+p_dim[0],p_loc[1]+p_dim[1]];
 
       for(const thing_id of this.currentScene.things){
@@ -326,8 +332,8 @@ class Game extends GameContainer {
       }
       if(this.currentScene.draw_player){
         var animation = this.player.animations[this.player_direction];
-        var spriteWidth = this.player.dimensions[0];
-        var spriteHeight = this.player.dimensions[1];
+        var spriteWidth = this.player.spriteDim[0];
+        var spriteHeight = this.player.spriteDim[1];
         var numFrames = animation.length;
         if (this.player.currentFrame >= numFrames){
             this.player.currentFrame = 0;

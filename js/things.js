@@ -24,6 +24,7 @@ class Thing extends GameContainer {
     this.currentFrame = 0;
     this.spriteRows = 1;
     this.spritesPerRow = 1;
+    this.spriteDim = [0,0];
     this.animations = {"up":[],"down":[],"left":[],"right":[]};
   }
 
@@ -74,6 +75,7 @@ class Thing extends GameContainer {
         this.spriteRows = data['spriteRows'];
         this.spritesPerRow = data['spritesPerRow'];
         this.animations = data['animations'];
+        this.spriteDim = data['spriteDim'];
       }
     }
   }
@@ -97,6 +99,7 @@ class Thing extends GameContainer {
       data['spriteRows'] = this.spriteRows;
       data['spritesPerRow'] = this.spritesPerRow;
       data['animations'] = this.animations;
+      data['spriteDim'] = this.spriteDim;
     }
 
     return data;
@@ -195,9 +198,7 @@ class Thing extends GameContainer {
     framesPerRowInputField.value = this.spritesPerRow;
     framesPerRowInputField.addEventListener("change", (event)=> {
       me.spritesPerRow = parseInt(event.target.value);
-      xDimInputField.value = me.spriteImage.width/me.spritesPerRow;
-      var e = new Event('change');
-      xDimInputField.dispatchEvent(e);
+      me.spriteDim[0] = me.spriteImage.width/me.spritesPerRow;
     })
 
     var inputLabel5 = document.createElement("label")
@@ -207,9 +208,7 @@ class Thing extends GameContainer {
     frameRowsInputField.value = this.spriteRows;
     frameRowsInputField.addEventListener("change", (event)=> {
       me.spriteRows = parseInt(event.target.value);
-      yDimInputField.value = me.spriteImage.height/me.spriteRows;
-      var e = new Event('change');
-      yDimInputField.dispatchEvent(e);
+      me.spriteDim[1] = me.spriteImage.height/me.spriteRows;
     })
 
     editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'));

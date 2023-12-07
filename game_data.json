@@ -658,7 +658,7 @@
           "scene_id": "10",
           "player_pos": [
             176,
-            152
+            144
           ]
         }
       ],
@@ -672,7 +672,7 @@
       ],
       "dimensions": [
         16,
-        8
+        4
       ],
       "spritePath": "assets/sprites/transparent.png",
       "animate": false
@@ -1165,11 +1165,11 @@
       "triggered": false,
       "location": [
         176,
-        176
+        180
       ],
       "dimensions": [
         16,
-        8
+        4
       ],
       "spritePath": "assets/sprites/transparent.png",
       "animate": false
@@ -1777,8 +1777,8 @@
       0
     ],
     "dimensions": [
-      18,
-      32
+      16,
+      28
     ],
     "spritePath": "assets/sprites/morgans.png",
     "animate": true,
@@ -1842,7 +1842,11 @@
           2
         ]
       ]
-    }
+    },
+    "spriteDim": [
+      18,
+      32
+    ]
   },
   "scenes": {
     "0": {
