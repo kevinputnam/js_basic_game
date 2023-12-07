@@ -16,7 +16,7 @@ class Player extends Thing {
     this.dimensions = [0,0];
   }
 
- updateDisplay(nodeSpan){
-  nodeSpan.innerHTML = '<b>'+this.name+'</b>: ' + this.description;
+  updateDisplay(nodeSpan){
+    nodeSpan.innerHTML = '<b>'+this.name+'</b>: ' + this.description;
   }
 }

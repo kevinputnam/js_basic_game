@@ -2462,19 +2462,13 @@
               "value": "2"
             },
             {
-              "name": "Action_case",
-              "actions": [
-                {
-                  "name": "Action_change_scene",
-                  "actions": null,
-                  "scene_id": "8",
-                  "player_pos": [
-                    208,
-                    96
-                  ]
-                }
-              ],
-              "value": "3"
+              "name": "Action_change_scene",
+              "actions": null,
+              "scene_id": "8",
+              "player_pos": [
+                208,
+                96
+              ]
             }
           ],
           "variable": "chapter_selection"
@@ -3671,19 +3665,13 @@
               "value": "2"
             },
             {
-              "name": "Action_case",
-              "actions": [
-                {
-                  "name": "Action_change_scene",
-                  "actions": null,
-                  "scene_id": "8",
-                  "player_pos": [
-                    208,
-                    96
-                  ]
-                }
-              ],
-              "value": "3"
+              "name": "Action_change_scene",
+              "actions": null,
+              "scene_id": "8",
+              "player_pos": [
+                208,
+                96
+              ]
             }
           ],
           "variable": "chapter_selection"
@@ -3771,19 +3759,13 @@
               "value": "2"
             },
             {
-              "name": "Action_case",
-              "actions": [
-                {
-                  "name": "Action_change_scene",
-                  "actions": null,
-                  "scene_id": "8",
-                  "player_pos": [
-                    208,
-                    96
-                  ]
-                }
-              ],
-              "value": "3"
+              "name": "Action_change_scene",
+              "actions": null,
+              "scene_id": "8",
+              "player_pos": [
+                208,
+                96
+              ]
             }
           ],
           "variable": "chapter_selection"
@@ -3871,19 +3853,13 @@
               "value": "2"
             },
             {
-              "name": "Action_case",
-              "actions": [
-                {
-                  "name": "Action_change_scene",
-                  "actions": null,
-                  "scene_id": "8",
-                  "player_pos": [
-                    208,
-                    96
-                  ]
-                }
-              ],
-              "value": "3"
+              "name": "Action_change_scene",
+              "actions": null,
+              "scene_id": "8",
+              "player_pos": [
+                208,
+                96
+              ]
             }
           ],
           "variable": "chapter_selection"

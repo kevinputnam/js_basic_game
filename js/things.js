@@ -20,6 +20,11 @@ class Thing extends GameContainer {
     this.spritePath = "";
     this.location = [0,0];
     this.dimensions = [0,0];
+    this.animate = false;
+    this.currentFrame = 0;
+    this.spriteRows = 1;
+    this.spritesPerRow = 1;
+    this.animations = {"up":[],"down":[],"left":[],"right":[]};
   }
 
   load(data) {
@@ -62,6 +67,15 @@ class Thing extends GameContainer {
         me.game.drawCollisions();
       });
     }
+    if ('animate' in data){
+      this.animate = data['animate'];
+      if (data['animate']){
+        this.currentFrame = data['currentFrame'];
+        this.spriteRows = data['spriteRows'];
+        this.spritesPerRow = data['spritesPerRow'];
+        this.animations = data['animations'];
+      }
+    }
   }
 
   save() {
@@ -77,6 +91,13 @@ class Thing extends GameContainer {
     data['dimensions'][0] = this.dimensions[0];
     data['dimensions'][1] = this.dimensions[1];
     data['spritePath'] = this.spritePath;
+    data['animate'] = this.animate;
+    if (this.animate){
+      data['currentFrame'] = this.currentFrame;
+      data['spriteRows'] = this.spriteRows;
+      data['spritesPerRow'] = this.spritesPerRow;
+      data['animations'] = this.animations;
+    }
 
     return data;
   }
@@ -155,6 +176,83 @@ class Thing extends GameContainer {
     })
 
     editView.append(inputLabel3,xDimInputField,yDimInputField,document.createElement('br'),spriteThumbnail,document.createElement('br'));
+
+    var animateCheckbox = createElementWithAttributes('input',{'type':'checkbox'});
+    animateCheckbox.checked = this.animate;
+    animateCheckbox.addEventListener("change", (event)=>{
+      me.animate = event.target.checked;
+    })
+
+    var animateLabel = document.createElement("label");
+    animateLabel.innerHTML = "Animate sprite";
+
+    editView.append(animateCheckbox,animateLabel,document.createElement('br'));
+
+    var inputLabel4 = document.createElement("label")
+    inputLabel4.innerHTML = "Frames per row: ";
+
+    var framesPerRowInputField = createElementWithAttributes('input',{'type':'number','min':'1','max':'20'});
+    framesPerRowInputField.value = this.spritesPerRow;
+    framesPerRowInputField.addEventListener("change", (event)=> {
+      me.spritesPerRow = parseInt(event.target.value);
+      xDimInputField.value = me.spriteImage.width/me.spritesPerRow;
+      var e = new Event('change');
+      xDimInputField.dispatchEvent(e);
+    })
+
+    var inputLabel5 = document.createElement("label")
+    inputLabel5.innerHTML = "Number of rows: ";
+
+    var frameRowsInputField = createElementWithAttributes('input',{'type':'number','min':'1','max':'20'});
+    frameRowsInputField.value = this.spriteRows;
+    frameRowsInputField.addEventListener("change", (event)=> {
+      me.spriteRows = parseInt(event.target.value);
+      yDimInputField.value = me.spriteImage.height/me.spriteRows;
+      var e = new Event('change');
+      yDimInputField.dispatchEvent(e);
+    })
+
+    editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'));
+
+    var downLabel = document.createElement("label");
+    downLabel.innerHTML = "Down: ";
+
+    var downInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'60'});
+    downInputField.value = listOfListsString(this.animations['down']);
+    downInputField.addEventListener("change", (event)=> {
+      me.animations['down'] = eval(event.target.value);
+    })
+
+    var upLabel = document.createElement("label");
+    upLabel.innerHTML = "Up: ";
+
+    var upInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'60'});
+    upInputField.value = listOfListsString(this.animations['up']);
+    upInputField.addEventListener("change", (event)=> {
+      me.animations['up'] = eval(event.target.value);
+    })
+
+    var leftLabel = document.createElement("label");
+    leftLabel.innerHTML = "Left: ";
+
+    var leftInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'60'});
+    leftInputField.value = listOfListsString(this.animations['left']);
+    leftInputField.addEventListener("change", (event)=> {
+      me.animations['left'] = eval(event.target.value);
+    })
+
+    var rightLabel = document.createElement("label");
+    rightLabel.innerHTML = "Right: ";
+
+    var rightInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'60'});
+    rightInputField.value = listOfListsString(this.animations['right']);
+    rightInputField.addEventListener("change", (event)=> {
+      me.animations['right'] = eval(event.target.value);
+    })
+
+    editView.append(downLabel, downInputField,document.createElement('br'),upLabel, upInputField,document.createElement('br'),
+      leftLabel, leftInputField,document.createElement('br'),
+      rightLabel, rightInputField,document.createElement('br'));
 
     if (node){
       if (!node.classList.contains('game'))

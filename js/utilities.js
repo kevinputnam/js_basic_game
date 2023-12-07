@@ -27,3 +27,15 @@ function collision(rect1,rect2){
   }
   return false;
 }
+
+function listOfListsString(lists){
+  var output = "[";
+  for (const l of lists){
+    output += "[" + l.toString() + "],";
+  }
+  if (lists.length != 0){
+    output = output.slice(0,-1);
+  }
+  output += "]";
+  return output;
+}
