@@ -104,7 +104,8 @@
         32,
         16
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "1": {
       "name": "Planet Jumper Tavern",
@@ -154,7 +155,8 @@
         16,
         16
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "2": {
       "name": "Exit Tavern",
@@ -183,7 +185,8 @@
         16,
         16
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "3": {
       "name": "Exit Hospital",
@@ -212,7 +215,8 @@
         32,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "4": {
       "name": "Enter Museum",
@@ -262,7 +266,8 @@
         8,
         32
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "5": {
       "name": "Use Terminal",
@@ -342,7 +347,8 @@
         16,
         2
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "6": {
       "name": "Enter Hospital",
@@ -371,7 +377,8 @@
         32,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "7": {
       "name": "Planet Jumper Tavern",
@@ -390,7 +397,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "8": {
       "name": "Elevator control panel",
@@ -496,7 +504,8 @@
         8,
         16
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "9": {
       "name": "View Spaceport Map",
@@ -525,7 +534,8 @@
         32,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "10": {
       "name": "Teleporter",
@@ -554,7 +564,8 @@
         16,
         16
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "11": {
       "name": "Go to Spaceport West",
@@ -583,7 +594,8 @@
         4,
         106
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "12": {
       "name": "Go to Spaceport East",
@@ -612,7 +624,8 @@
         4,
         106
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "13": {
       "name": "Enter Maynard's Supply",
@@ -631,7 +644,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "14": {
       "name": "Enter Madame Lucinda's",
@@ -660,7 +674,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "15": {
       "name": "Hospital Receptionist",
@@ -906,7 +921,8 @@
         16,
         20
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "16": {
       "name": "Enter Comm Center",
@@ -935,7 +951,8 @@
         32,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "17": {
       "name": "Enter Restricted Area",
@@ -994,7 +1011,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "18": {
       "name": "Enter Space docks",
@@ -1043,7 +1061,8 @@
         32,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "19": {
       "name": "Enter Spacer's Guild",
@@ -1062,7 +1081,8 @@
         32,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "20": {
       "name": "Go East to main spaceport",
@@ -1075,7 +1095,7 @@
           "scene_id": "6",
           "player_pos": [
             20,
-            100
+            80
           ]
         }
       ],
@@ -1091,7 +1111,8 @@
         4,
         120
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "21": {
       "name": "Go West to main spaceport",
@@ -1120,7 +1141,8 @@
         4,
         120
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "22": {
       "name": "Exit Madame Lucinda's",
@@ -1149,7 +1171,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "23": {
       "name": "Madame Lucinda",
@@ -1517,7 +1540,8 @@
         24,
         24
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "24": {
       "name": "Comm Terminal 1 & 2",
@@ -1589,7 +1613,8 @@
         28,
         2
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "25": {
       "name": "Enter elevator",
@@ -1618,7 +1643,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "26": {
       "name": "Door to starport east",
@@ -1647,7 +1673,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "27": {
       "name": "Comm Terminals 3 & 4",
@@ -1675,7 +1702,8 @@
         28,
         2
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "28": {
       "name": "Enter elevator",
@@ -1704,7 +1732,8 @@
         16,
         8
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     },
     "29": {
       "name": "Environmental controls",
@@ -1731,7 +1760,8 @@
         16,
         2
       ],
-      "spritePath": "assets/sprites/transparent.png"
+      "spritePath": "assets/sprites/transparent.png",
+      "animate": false
     }
   },
   "player": {
@@ -1747,10 +1777,72 @@
       0
     ],
     "dimensions": [
-      16,
-      26
+      18,
+      32
     ],
-    "spritePath": "assets/sprites/morgan.png"
+    "spritePath": "assets/sprites/morgans.png",
+    "animate": true,
+    "currentFrame": 0,
+    "spriteRows": 4,
+    "spritesPerRow": 3,
+    "animations": {
+      "up": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "down": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "left": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "right": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    }
   },
   "scenes": {
     "0": {

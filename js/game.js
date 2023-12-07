@@ -33,6 +33,8 @@ class Game extends GameContainer {
     this.controlKeys = ["ArrowDown","ArrowUp","ArrowLeft","ArrowRight","a","s"];
     this.buttonEventHandler = "default";
     this.player = new Player({'parent':null,'game':this.game});
+    this.player_direction = "down";
+    this.player_moved = false;
     this.collisionListener = null;
     this.controller = {
       "ArrowDown": false,
@@ -85,15 +87,19 @@ class Game extends GameContainer {
         switch (key) {
           case "ArrowDown":
             player_move[1] += 1;
+            this.player_direction = "down";
             break;
           case "ArrowUp":
             player_move[1] -= 1;
+            this.player_direction = "up";
             break;
           case "ArrowLeft":
             player_move[0] -= 1;
+            this.player_direction = "left";
             break;
           case "ArrowRight":
             player_move[0] += 1;
+            this.player_direction = "right";
             break;
           case "a":
             console.log('select');
@@ -107,6 +113,9 @@ class Game extends GameContainer {
       }
     }
     var moveLength = 3;
+    if (player_move[0] != 0 || player_move[1] != 0){
+      this.player_moved = true;
+    }
     if (player_move[0] != 0 && player_move[1] != 0){
       moveLength = parseInt(moveLength * 0.7071);
     }
@@ -316,7 +325,21 @@ class Game extends GameContainer {
         }
       }
       if(this.currentScene.draw_player){
-        this.playContext.drawImage(this.player.spriteImage,this.player.location[0],this.player.location[1]);
+        var animation = this.player.animations[this.player_direction];
+        var spriteWidth = this.player.dimensions[0];
+        var spriteHeight = this.player.dimensions[1];
+        var numFrames = animation.length;
+        if (this.player.currentFrame >= numFrames){
+            this.player.currentFrame = 0;
+        }
+        var currentFrame = this.player.currentFrame;
+        if(this.player_moved){
+          this.player.currentFrame += 1;
+          this.player_moved = false;
+        }
+        this.playContext.drawImage(this.player.spriteImage, animation[currentFrame][1] * spriteWidth, spriteHeight * animation[currentFrame][0], spriteWidth, spriteHeight, this.player.location[0], this.player.location[1], spriteWidth, spriteHeight);
+
+        //this.playContext.drawImage(this.player.spriteImage,this.player.location[0],this.player.location[1]);
       }
       this.drawMessage();
       this.drawMenu();
