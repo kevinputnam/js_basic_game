@@ -20,12 +20,16 @@ class Thing extends GameContainer {
     this.spritePath = "";
     this.location = [0,0];
     this.dimensions = [0,0];
-    this.animate = false;
-    this.currentFrame = 0;
+    this.animated = false;
+    this.animationFrame = 0;
     this.spriteRows = 1;
     this.spritesPerRow = 1;
-    this.spriteDim = [0,0];
+    this.spriteWidth = 0;
+    this.spriteHeight = 0;
     this.animations = {"up":[],"down":[],"left":[],"right":[]};
+    this.direction = "down";
+    this.animationWaitCounter = 0;
+    this.moved = false;
   }
 
   load(data) {
@@ -68,14 +72,14 @@ class Thing extends GameContainer {
         me.game.drawCollisions();
       });
     }
-    if ('animate' in data){
-      this.animate = data['animate'];
-      if (data['animate']){
-        this.currentFrame = data['currentFrame'];
+    if ('animated' in data){
+      this.animated = data['animated'];
+      if (this.animated){
         this.spriteRows = data['spriteRows'];
         this.spritesPerRow = data['spritesPerRow'];
         this.animations = data['animations'];
-        this.spriteDim = data['spriteDim'];
+        this.spriteWidth = data['spriteDim'][0];
+        this.spriteHeight = data['spriteDim'][1];
       }
     }
   }
@@ -93,13 +97,12 @@ class Thing extends GameContainer {
     data['dimensions'][0] = this.dimensions[0];
     data['dimensions'][1] = this.dimensions[1];
     data['spritePath'] = this.spritePath;
-    data['animate'] = this.animate;
-    if (this.animate){
-      data['currentFrame'] = this.currentFrame;
+    data['animated'] = this.animated;
+    if (this.animated){
       data['spriteRows'] = this.spriteRows;
       data['spritesPerRow'] = this.spritesPerRow;
       data['animations'] = this.animations;
-      data['spriteDim'] = this.spriteDim;
+      data['spriteDim'] = [this.spriteWidth,this.spriteHeight];
     }
 
     return data;
@@ -114,9 +117,48 @@ class Thing extends GameContainer {
     return null;
   }
 
+// Game Code
+
   run(){
     this.game.runStackInsert(this.actions);
   }
+
+  move(){
+
+  }
+
+  draw(ctx){
+    if (this.animated){
+      var animation = this.animations[this.direction];
+      var numFrames = this.animations[this.direction].length;
+      if(this.moved){
+        if(this.animationWaitCounter > 2){ //only animate every third movement
+          this.animationFrame += 1;
+          this.moved = false;
+          this.animationWaitCounter = 0;
+        }
+        this.animationWaitCounter += 1;
+      }
+      if (this.animationFrame >= numFrames){
+        this.animationFrame = 0;
+      }
+      ctx.drawImage(this.spriteImage,
+                    animation[this.animationFrame][1] * this.spriteWidth,
+                    animation[this.animationFrame][0] * this.spriteHeight,
+                    this.spriteWidth,
+                    this.spriteHeight,
+                    this.location[0],
+                    this.location[1],
+                    this.spriteWidth,
+                    this.spriteHeight);
+    }else{
+      if(this.spriteImage){
+        ctx.drawImage(this.spriteImage,this.location[0],this.location[1]);
+      }
+    }
+  }
+
+// Editor Code
 
   edit(node){
     super.edit(node);
@@ -198,7 +240,7 @@ class Thing extends GameContainer {
     framesPerRowInputField.value = this.spritesPerRow;
     framesPerRowInputField.addEventListener("change", (event)=> {
       me.spritesPerRow = parseInt(event.target.value);
-      me.spriteDim[0] = me.spriteImage.width/me.spritesPerRow;
+      me.spriteWidth = me.spriteImage.width/me.spritesPerRow;
     })
 
     var inputLabel5 = document.createElement("label")
@@ -208,7 +250,7 @@ class Thing extends GameContainer {
     frameRowsInputField.value = this.spriteRows;
     frameRowsInputField.addEventListener("change", (event)=> {
       me.spriteRows = parseInt(event.target.value);
-      me.spriteDim[1] = me.spriteImage.height/me.spriteRows;
+      me.spriteHeight = me.spriteImage.height/me.spriteRows;
     })
 
     editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'));

@@ -139,7 +139,8 @@ class GameContainer extends BuildingBlock{
   }
 
   addThing(thing_id){
-    if(Object.keys(this.game.things).includes(thing_id)){
+    var thing_str = thing_id.toString();
+    if(Object.keys(this.game.things).includes(thing_str)){
       this.things.push(parseInt(thing_id));
       this.game.things[thing_id].parent = this;
       for (const node of this.nodes){

@@ -105,7 +105,7 @@
         16
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "1": {
       "name": "Planet Jumper Tavern",
@@ -156,7 +156,7 @@
         16
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "2": {
       "name": "Exit Tavern",
@@ -186,7 +186,7 @@
         16
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "3": {
       "name": "Exit Hospital",
@@ -216,7 +216,7 @@
         4
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "4": {
       "name": "Enter Museum",
@@ -267,7 +267,7 @@
         32
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "5": {
       "name": "Use Terminal",
@@ -348,7 +348,7 @@
         2
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "6": {
       "name": "Enter Hospital",
@@ -378,7 +378,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "7": {
       "name": "Planet Jumper Tavern",
@@ -398,7 +398,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "8": {
       "name": "Elevator control panel",
@@ -505,7 +505,7 @@
         16
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "9": {
       "name": "View Spaceport Map",
@@ -535,7 +535,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "10": {
       "name": "Teleporter",
@@ -565,7 +565,7 @@
         16
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "11": {
       "name": "Go to Spaceport West",
@@ -595,7 +595,7 @@
         106
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "12": {
       "name": "Go to Spaceport East",
@@ -625,7 +625,7 @@
         106
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "13": {
       "name": "Enter Maynard's Supply",
@@ -645,7 +645,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "14": {
       "name": "Enter Madame Lucinda's",
@@ -675,7 +675,7 @@
         4
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "15": {
       "name": "Hospital Receptionist",
@@ -922,7 +922,7 @@
         20
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "16": {
       "name": "Enter Comm Center",
@@ -952,7 +952,7 @@
         4
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "17": {
       "name": "Enter Restricted Area",
@@ -977,7 +977,7 @@
               "scene_id": "11",
               "player_pos": [
                 172,
-                109
+                106
               ]
             },
             {
@@ -1012,7 +1012,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "18": {
       "name": "Enter Space docks",
@@ -1062,7 +1062,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "19": {
       "name": "Enter Spacer's Guild",
@@ -1082,7 +1082,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "20": {
       "name": "Go East to main spaceport",
@@ -1112,7 +1112,7 @@
         120
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "21": {
       "name": "Go West to main spaceport",
@@ -1142,7 +1142,7 @@
         120
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "22": {
       "name": "Exit Madame Lucinda's",
@@ -1172,7 +1172,7 @@
         4
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "23": {
       "name": "Madame Lucinda",
@@ -1541,7 +1541,7 @@
         24
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "24": {
       "name": "Comm Terminal 1 & 2",
@@ -1614,7 +1614,7 @@
         2
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "25": {
       "name": "Enter elevator",
@@ -1627,7 +1627,7 @@
           "scene_id": "11",
           "player_pos": [
             172,
-            109
+            106
           ]
         }
       ],
@@ -1644,7 +1644,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "26": {
       "name": "Door to starport east",
@@ -1674,7 +1674,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "27": {
       "name": "Comm Terminals 3 & 4",
@@ -1703,7 +1703,7 @@
         2
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "28": {
       "name": "Enter elevator",
@@ -1716,7 +1716,7 @@
           "scene_id": "11",
           "player_pos": [
             172,
-            109
+            106
           ]
         }
       ],
@@ -1733,7 +1733,7 @@
         8
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
     },
     "29": {
       "name": "Environmental controls",
@@ -1761,7 +1761,60 @@
         2
       ],
       "spritePath": "assets/sprites/transparent.png",
-      "animate": false
+      "animated": false
+    },
+    "30": {
+      "name": "key",
+      "description": "Useless key",
+      "things": [],
+      "actions": [
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Yes",
+            "No"
+          ],
+          "prompt": [
+            "Pick up the key?"
+          ],
+          "variable": "pick_up_key",
+          "useValue": false
+        },
+        {
+          "name": "Action_if_eval",
+          "actions": [
+            {
+              "name": "Action_put_thing",
+              "actions": null,
+              "thing_id": "30",
+              "target_type": "player",
+              "target_id": 0,
+              "location": [
+                0,
+                0
+              ]
+            }
+          ],
+          "val1": "`$pick_up_key`",
+          "val2": "0",
+          "operator": "=="
+        }
+      ],
+      "id": 30,
+      "hidden": false,
+      "trigger": false,
+      "triggered": false,
+      "location": [
+        128,
+        80
+      ],
+      "dimensions": [
+        16,
+        16
+      ],
+      "spritePath": "assets/sprites/key.png",
+      "animated": false
     }
   },
   "player": {
@@ -1781,8 +1834,7 @@
       28
     ],
     "spritePath": "assets/sprites/morgans.png",
-    "animate": true,
-    "currentFrame": 0,
+    "animated": true,
     "spriteRows": 4,
     "spritesPerRow": 3,
     "animations": {
@@ -3195,7 +3247,8 @@
       "description": "You never know what she's going to tell you.",
       "things": [
         22,
-        23
+        23,
+        30
       ],
       "actions": [],
       "id": 10,

@@ -33,9 +33,7 @@ class Game extends GameContainer {
     this.controlKeys = ["ArrowDown","ArrowUp","ArrowLeft","ArrowRight","a","s"];
     this.buttonEventHandler = "default";
     this.player = new Player({'parent':null,'game':this.game});
-    this.player_direction = "down";
-    this.player_moved = false;
-    this.animation_counter = 0;
+    this.diagonal_x = false;
     this.collisionListener = null;
     this.controller = {
       "ArrowDown": false,
@@ -88,19 +86,19 @@ class Game extends GameContainer {
         switch (key) {
           case "ArrowDown":
             player_move[1] += 1;
-            this.player_direction = "down";
+            this.player.direction = "down";
             break;
           case "ArrowUp":
             player_move[1] -= 1;
-            this.player_direction = "up";
+            this.player.direction = "up";
             break;
           case "ArrowLeft":
             player_move[0] -= 1;
-            this.player_direction = "left";
+            this.player.direction = "left";
             break;
           case "ArrowRight":
             player_move[0] += 1;
-            this.player_direction = "right";
+            this.player.direction = "right";
             break;
           case "a":
             console.log('select');
@@ -115,10 +113,16 @@ class Game extends GameContainer {
     }
     var moveLength = 1;
     if (player_move[0] != 0 || player_move[1] != 0){
-      this.player_moved = true;
+      this.player.moved = true;
     }
     if (player_move[0] != 0 && player_move[1] != 0){
-      moveLength = parseInt(moveLength * 0.7071);
+      if(this.diagonal_x){
+        player_move[1] = 0;
+        this.diagonal_x = false;
+      }else{
+        player_move[0] = 0;
+        this.diagonal_x = true;
+      }
     }
     player_move[0] = player_move[0] * moveLength;
     player_move[1] = player_move[1] * moveLength;
@@ -263,8 +267,8 @@ class Game extends GameContainer {
       p_loc[0] = newLoc[0];
       p_loc[1] = newLoc[1];
       const p_dim = this.player.dimensions;
-      var px_offset = parseInt((this.player.spriteDim[0] - p_dim[0])/2);
-      var py_offset = parseInt((this.player.spriteDim[1] - p_dim[1])/2);
+      var px_offset = parseInt((this.player.spriteWidth - p_dim[0])/2);
+      var py_offset = parseInt((this.player.spriteHeight - p_dim[1])/2);
       p_loc[0] += px_offset;
       p_loc[1] += py_offset;
       var player_rect = [p_loc[0],p_loc[1],p_loc[0]+p_dim[0],p_loc[1]+p_dim[1]];
@@ -327,30 +331,10 @@ class Game extends GameContainer {
 
       for (const thing_id of this.currentScene.things){
         var thing = game.things[thing_id];
-        if (thing.spriteImage){
-          this.playContext.drawImage(thing.spriteImage,thing.location[0],thing.location[1]);
-        }
+        thing.draw(this.playContext);
       }
       if(this.currentScene.draw_player){
-        var animation = this.player.animations[this.player_direction];
-        var spriteWidth = this.player.spriteDim[0];
-        var spriteHeight = this.player.spriteDim[1];
-        var numFrames = animation.length;
-        if (this.player.currentFrame >= numFrames){
-            this.player.currentFrame = 0;
-        }
-        var currentFrame = this.player.currentFrame;
-        if(this.player_moved){
-          if(this.animation_counter > 2){
-            this.player.currentFrame += 1;
-            this.player_moved = false;
-            this.animation_counter = 0;
-          }
-          this.animation_counter += 1;
-        }
-        this.playContext.drawImage(this.player.spriteImage, animation[currentFrame][1] * spriteWidth, spriteHeight * animation[currentFrame][0], spriteWidth, spriteHeight, this.player.location[0], this.player.location[1], spriteWidth, spriteHeight);
-
-        //this.playContext.drawImage(this.player.spriteImage,this.player.location[0],this.player.location[1]);
+        this.player.draw(this.playContext);
       }
       this.drawMessage();
       this.drawMenu();
@@ -413,7 +397,7 @@ class Game extends GameContainer {
     if (this.currentMessage){
       var lineNum = 0;
       //draw rectangle
-      this.playContext.fillStyle = "black";
+      this.playContext.fillStyle = 'rgb(100,100,100)';
       this.playContext.fillRect(80, 0, this.messageBoxDimensions[0], this.messageBoxDimensions[1])
       //draw text
       this.playContext.fillStyle = "white";
@@ -444,7 +428,7 @@ class Game extends GameContainer {
         lines.push(line);
       }
       //draw rectangle
-      this.playContext.fillStyle = "black";
+      this.playContext.fillStyle = 'rgb(100,100,100)';
       this.playContext.fillRect(80, 0, this.messageBoxDimensions[0], this.messageBoxDimensions[1])
       //draw text
       this.playContext.fillStyle = "white";
