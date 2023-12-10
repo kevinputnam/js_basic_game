@@ -183,7 +183,8 @@ class Game extends GameContainer {
 
     this.running = true;
     this.runStack = this.runStack.concat(this.actions);
-    this.loop();
+    this.stackLoop();
+    this.viewLoop();
   }
 
   stop(){
@@ -204,8 +205,12 @@ class Game extends GameContainer {
     removeEventListener("keydown",this,false);
   }
 
-  loop(){
+  stackLoop(){
     setTimeout(() => this.stackRunner(),12);
+  }
+
+  viewLoop(){
+    setTimeout(() => this.updatePlayLoop(),12);
   }
 
   stackRunner(){
@@ -218,12 +223,21 @@ class Game extends GameContainer {
         this.currentAction.run();
       }
     }
+    if (this.running){
+      this.stackLoop();
+    }else{
+      console.log("Stopping run stack!");
+      this.reset();
+    }
+  }
+
+  updatePlayLoop(){
     this.updatePlayView();
 
     if (this.running){
-      this.loop();
+      this.viewLoop();
     }else{
-      console.log("Stopping!");
+      console.log("Stopping iew updates!");
       this.reset();
     }
   }
