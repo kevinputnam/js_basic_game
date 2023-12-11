@@ -111,9 +111,14 @@ class Game extends GameContainer {
             console.log('nothing');
         }
       }
-      this.player.dx = moveX * moveDistance;
-      this.player.dy = moveY * moveDistance;
     }
+    if(moveX != 0 && moveY != 0){
+      moveX = moveX * 0.7071;
+      moveY = moveY * 0.7071;
+    }
+    this.player.dx = moveX * moveDistance;
+    this.player.dy = moveY * moveDistance;
+
   }
 
   messageButtonHandler(key){
@@ -219,9 +224,6 @@ class Game extends GameContainer {
     }
     if (this.player.dx != 0 || this.player.dy != 0){
       this.player.moved = true;
-    }
-    if (this.player.dx != 0 && this.player.dy != 0){
-
     }
     if (this.currentScene){
       this.movePlayer();
