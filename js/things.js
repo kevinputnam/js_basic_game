@@ -30,6 +30,8 @@ class Thing extends GameContainer {
     this.direction = "down";
     this.animationWaitCounter = 0;
     this.moved = false;
+    this.dx = 0;
+    this.dy = 0;
   }
 
   load(data) {
@@ -120,11 +122,42 @@ class Thing extends GameContainer {
 // Game Code
 
   run(){
-    this.game.runStackInsert(this.actions);
+    if (!this.triggered){
+      this.game.runStackInsert(this.actions);
+      this.triggered = true;
+    }
   }
 
   move(){
 
+  }
+
+  collision(rect){
+    var my_rect = this.getRect();
+    if (collision(rect,my_rect)){
+      this.run();
+      return true;
+    }
+    this.triggered = false;
+    return false;
+  }
+
+  getRect(){
+    if (!this.animated){
+      if (this.spriteImage){
+        this.spriteWidth = this.spriteImage.width;
+        this.spriteHeight = this.spriteImage.height;
+      }else{
+        this.spriteWidth = this.dimensions[0];
+        this.spriteHeight = this.dimensions[1];
+      }
+    }
+    var x_offset = parseInt((this.spriteWidth - this.dimensions[0])/2);
+    var y_offset = parseInt((this.spriteHeight - this.dimensions[1])/2);
+    var loc = [this.location[0] + x_offset,this.location[1] + y_offset];
+    var rect = [this.location[0],this.location[1],this.location[0]+this.dimensions[0],this.location[1]+this.dimensions[1]];
+
+    return rect;
   }
 
   draw(ctx){
@@ -223,9 +256,9 @@ class Thing extends GameContainer {
     editView.append(inputLabel3,xDimInputField,yDimInputField,document.createElement('br'),spriteThumbnail,document.createElement('br'));
 
     var animateCheckbox = createElementWithAttributes('input',{'type':'checkbox'});
-    animateCheckbox.checked = this.animate;
+    animateCheckbox.checked = this.animated;
     animateCheckbox.addEventListener("change", (event)=>{
-      me.animate = event.target.checked;
+      me.animated = event.target.checked;
     })
 
     var animateLabel = document.createElement("label");

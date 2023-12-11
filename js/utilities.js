@@ -19,6 +19,19 @@ function toggleHighlight(nodeSpan){
   nodeSpan.classList.add('select-highlight');
 }
 
+function outOfBounds(dx,dy,rect,boundaries){
+  var d={'x':dx,'y':dy};
+  if(rect[2] > boundaries[2] || rect[0] < boundaries[0]){
+    d.x = 0;
+  }
+
+  if(rect[3] > boundaries[3] || rect[1] < boundaries[1]){
+    d.y = 0;
+  }
+
+  return d;
+}
+
 function collision(rect1,rect2){
   var dx = Math.min(rect1[2], rect2[2]) - Math.max(rect1[0], rect2[0]);
   var dy = Math.min(rect1[3], rect2[3]) - Math.max(rect1[1], rect2[1]);
@@ -26,6 +39,12 @@ function collision(rect1,rect2){
     return true;
   }
   return false;
+}
+
+function collisionRect(dim,x,y){
+  var x_coord = x*dim;
+  var y_coord = y*dim;
+  return [x_coord,y_coord,x_coord+dim,y_coord+dim]
 }
 
 function listOfListsString(lists){

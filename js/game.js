@@ -33,7 +33,6 @@ class Game extends GameContainer {
     this.controlKeys = ["ArrowDown","ArrowUp","ArrowLeft","ArrowRight","a","s"];
     this.buttonEventHandler = "default";
     this.player = new Player({'parent':null,'game':this.game});
-    this.diagonal_x = false;
     this.collisionListener = null;
     this.controller = {
       "ArrowDown": false,
@@ -80,24 +79,26 @@ class Game extends GameContainer {
   }
 
   defaultButtonHandler(keys){
-    var player_move = [0,0]
+    var moveX = 0;
+    var moveY = 0;
+    var moveDistance = 1;
     for (const [key,pressed] of Object.entries(keys)){
       if (pressed){
         switch (key) {
           case "ArrowDown":
-            player_move[1] += 1;
+            moveY += 1;
             this.player.direction = "down";
             break;
           case "ArrowUp":
-            player_move[1] -= 1;
+            moveY -= 1;
             this.player.direction = "up";
             break;
           case "ArrowLeft":
-            player_move[0] -= 1;
+            moveX -= 1;
             this.player.direction = "left";
             break;
           case "ArrowRight":
-            player_move[0] += 1;
+            moveX += 1;
             this.player.direction = "right";
             break;
           case "a":
@@ -110,24 +111,8 @@ class Game extends GameContainer {
             console.log('nothing');
         }
       }
-    }
-    var moveLength = 1;
-    if (player_move[0] != 0 || player_move[1] != 0){
-      this.player.moved = true;
-    }
-    if (player_move[0] != 0 && player_move[1] != 0){
-      if(this.diagonal_x){
-        player_move[1] = 0;
-        this.diagonal_x = false;
-      }else{
-        player_move[0] = 0;
-        this.diagonal_x = true;
-      }
-    }
-    player_move[0] = player_move[0] * moveLength;
-    player_move[1] = player_move[1] * moveLength;
-    if (this.currentScene){
-      this.movePlayer(player_move);
+      this.player.dx = moveX * moveDistance;
+      this.player.dy = moveY * moveDistance;
     }
   }
 
@@ -214,9 +199,6 @@ class Game extends GameContainer {
   }
 
   stackRunner(){
-    if (this.buttonEventHandler == 'default'){
-      this.defaultButtonHandler(this.controller);
-    }
     if(!this.runStackPaused){
       if (this.runStack.length > 0){
         this.currentAction = this.runStack.shift();
@@ -232,12 +214,24 @@ class Game extends GameContainer {
   }
 
   updatePlayLoop(){
+    if (this.buttonEventHandler == 'default'){
+      this.defaultButtonHandler(this.controller);
+    }
+    if (this.player.dx != 0 || this.player.dy != 0){
+      this.player.moved = true;
+    }
+    if (this.player.dx != 0 && this.player.dy != 0){
+
+    }
+    if (this.currentScene){
+      this.movePlayer();
+    }
     this.updatePlayView();
 
     if (this.running){
       this.viewLoop();
     }else{
-      console.log("Stopping iew updates!");
+      console.log("Stopping view updates!");
       this.reset();
     }
   }
@@ -257,66 +251,55 @@ class Game extends GameContainer {
     this.currentScene.run();
   }
 
-  movePlayer(coords){
+  movePlayer(moveX,moveY){
     if (this.currentScene.draw_player){
-      var newLoc = [];
-      newLoc[0] = parseInt(this.player.location[0]) + coords[0];
-      newLoc[1] = parseInt(this.player.location[1]) + coords[1];
 
-      //stay within the screen boundaries.
-      if(newLoc[0] + this.player.dimensions[0] > this.screenDimensions[0]){
-        newLoc[0] = this.screenDimensions[0] - this.player.dimensions[0];
-      }else if (this.player.location[0] < 0){
-        newLoc[0] = 0;
-      }
+      var player_rect = this.player.getRect();
+      player_rect[0] += this.player.dx;
+      player_rect[1] += this.player.dy;
+      player_rect[2] += this.player.dx;
+      player_rect[3] += this.player.dy;
 
-      if(this.player.location[1] + this.player.dimensions[1] > this.screenDimensions[1]){
-        newLoc[1] = this.screenDimensions[1] - this.player.dimensions[1];
-      }else if (this.player.location[1] < 0){
-        newLoc[1] = 0;
-      }
+      var dx_rect = this.player.getRect();
+      dx_rect[0] += this.player.dx;
+      dx_rect[2] += this.player.dx;
 
-      //process thing interactions
-      const p_loc = [0,0];
-      p_loc[0] = newLoc[0];
-      p_loc[1] = newLoc[1];
-      const p_dim = this.player.dimensions;
-      var px_offset = parseInt((this.player.spriteWidth - p_dim[0])/2);
-      var py_offset = parseInt((this.player.spriteHeight - p_dim[1])/2);
-      p_loc[0] += px_offset;
-      p_loc[1] += py_offset;
-      var player_rect = [p_loc[0],p_loc[1],p_loc[0]+p_dim[0],p_loc[1]+p_dim[1]];
+      var dy_rect = this.player.getRect();
+      dy_rect[1] += this.player.dy;
+      dy_rect[3] += this.player.dy;
 
+      //check if player exceeds scene boundary
+      var screenBoundaries = [0,0,this.currentScene.backgroundImage.width,this.currentScene.backgroundImage.height];
+      var d = outOfBounds(this.player.dx,this.player.dy,player_rect,screenBoundaries);
+      this.player.dx = d.x;
+      this.player.dy = d.y;
+
+      //resolve collisions with things
       for(const thing_id of this.currentScene.things){
-        const t_loc = this.game.things[thing_id].location;
-        const t_dim = this.game.things[thing_id].dimensions;
-        var thing_rect = [t_loc[0],t_loc[1],t_loc[0]+t_dim[0],t_loc[1]+t_dim[1]];
-        if (collision(player_rect,thing_rect)){
-          //run the thing and don't overlap it
-          newLoc[0] = this.player.location[0];
-          newLoc[1] = this.player.location[1];
-          if (!this.things[thing_id].triggered){
-            this.things[thing_id].run();
-            this.things[thing_id].triggered = true;
-          }
-        }else{
-          this.things[thing_id].triggered = false;
+        var t = this.things[thing_id];
+        if(t.collision(player_rect)){
+          this.player.dx = 0;
+          this.player.dy = 0;
         }
       }
+
+      //resolve collisions with walls
       const collDim = this.currentScene.collisionDimensions;
       for(const [x_str,y_list] of Object.entries(this.currentScene.collisions)){
-        var x_coord = parseInt(x_str)*collDim;
         for(var y of y_list){
-          var y_coord = y*collDim;
-          var coll_rect = [x_coord,y_coord,x_coord+collDim,y_coord+collDim];
-          if (collision(player_rect,coll_rect)){
-            newLoc[0] = this.player.location[0];
-            newLoc[1] = this.player.location[1];
+          var coll_rect = collisionRect(collDim,parseInt(x_str),y);
+          if (collision(dx_rect,coll_rect)){
+            this.player.dx = 0;
+          }
+          if (collision(dy_rect,coll_rect)){
+            this.player.dy = 0;
           }
         }
       }
-      this.player.location[0] = newLoc[0];
-      this.player.location[1] = newLoc[1];
+
+      this.player.location[0] += this.player.dx;
+      this.player.location[1] += this.player.dy;
+
     }
   }
 
