@@ -17,6 +17,8 @@ class Game extends GameContainer {
     this.playContext = null;
     this.ctxScaling = 2;
     this.currentScene = null;
+    this.addingCollisions = false;
+    this.removingCollisions = false;
     this.messageBoxDimensions = [200,100];
     this.textFontSize = 10;
     this.textFont = this.textFontSize + "px courier";
@@ -316,6 +318,7 @@ class Game extends GameContainer {
     this.playContext.scale(this.ctxScaling,this.ctxScaling);
     this.playContext.imageSmoothingEnabled = false;
     this.playContext.font = this.textFont;
+    this.addCollisionListeners();
   }
 
   updatePlayView(){
@@ -338,34 +341,74 @@ class Game extends GameContainer {
     }
   }
 
-  editCollisions(){
-    var me = this;
+  collisionMouseUpHandler = (event) => {
     if (this.currentScene){
       if(this.currentScene.backgroundImage){
-        if(this.playContext){
-          this.collisionListener = this.canvas.addEventListener(
-            "click",
-            function (event) {
-              var collisions = me.currentScene.collisions;
-              var collisionLocScale = me.ctxScaling * me.currentScene.collisionDimensions;
-              var collClickX = Math.floor(event.offsetX/collisionLocScale);
-              var collClickY = Math.floor(event.offsetY/collisionLocScale);
-              if(!Object.keys(collisions).includes(collClickX.toString())){
-                collisions[collClickX] = [collClickY];
-              }else if (!collisions[collClickX].includes(collClickY)){
-                collisions[collClickX].push(collClickY);
-              }else{
+        this.addingCollisions = false;
+        this.removingCollisions = false;
+      }
+    }
+  }
+
+  collisionMouseDownHandler = (event) => {
+    if (!this.running){
+      if (this.currentScene){
+        if(this.currentScene.backgroundImage){
+          var collisions = this.currentScene.collisions;
+          var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
+          var collClickX = Math.floor(event.offsetX/collisionLocScale);
+          var collClickY = Math.floor(event.offsetY/collisionLocScale);
+          if (!this.addingCollisions && !this.removingCollisions){
+            if(!Object.keys(collisions).includes(collClickX.toString())){
+              collisions[collClickX] = [collClickY];
+              this.addingCollisions = true;
+            }else if (!collisions[collClickX].includes(collClickY)){
+              this.addingCollisions = true;
+              collisions[collClickX].push(collClickY);
+            }else{
+              this.removingCollisions = true;
+              collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  collisionMouseMoveHandler = (event) => {
+    if (!this.running){
+      if (this.currentScene){
+        if(this.currentScene.backgroundImage){
+          var collisions = this.currentScene.collisions;
+          var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
+          var collClickX = Math.floor(event.offsetX/collisionLocScale);
+          var collClickY = Math.floor(event.offsetY/collisionLocScale);
+          if (this.addingCollisions){
+            if(!Object.keys(collisions).includes(collClickX.toString())){
+              collisions[collClickX] = [collClickY];
+            } else if(!collisions[collClickX].includes(collClickY)){
+              collisions[collClickX].push(collClickY);
+            }
+          }
+          if (this.removingCollisions){
+            if(Object.keys(collisions).includes(collClickX.toString())){
+              if(collisions[collClickX].includes(collClickY)){
                 collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
-              }
-              me.drawCollisions();
-            },
-            false,
-          );
+             }
+            }
+          }
           this.drawCollisions();
         }
       }
     }
   }
+
+  addCollisionListeners(){
+    this.canvas.addEventListener("mouseup",this.collisionMouseUpHandler,false);
+    this.canvas.addEventListener("mousedown",this.collisionMouseDownHandler,false);
+    this.canvas.addEventListener("mousemove",this.collisionMouseMoveHandler,false,);
+  }
+
 
   drawCollisions(){
     if (this.currentScene){
