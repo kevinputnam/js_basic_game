@@ -20,6 +20,7 @@ class Thing extends GameContainer {
     this.spritePath = "";
     this.location = [0,0];
     this.dimensions = [0,0];
+    this.dimOffset = [0,0];
     this.animated = false;
     this.animationFrame = 0;
     this.spriteRows = 1;
@@ -67,6 +68,11 @@ class Thing extends GameContainer {
     }
     this.dimensions = newcoords;
 
+    if ('dimOffset' in data){
+      this.dimOffset[0] = parseInt(data['dimOffset'][0]);
+      this.dimOffset[1] = parseInt(data['dimOffset'][1]);
+    }
+
     this.spritePath = data['spritePath'];
     if(this.spritePath){
       this.spriteImage.setAttribute('src',this.spritePath);
@@ -98,6 +104,9 @@ class Thing extends GameContainer {
     data['dimensions'] = [];
     data['dimensions'][0] = this.dimensions[0];
     data['dimensions'][1] = this.dimensions[1];
+    data['dimOffset'] = [];
+    data['dimOffset'][0] = this.dimOffset[0];
+    data['dimOffset'][1] = this.dimOffset[1];
     data['spritePath'] = this.spritePath;
     data['animated'] = this.animated;
     if (this.animated){
@@ -152,10 +161,10 @@ class Thing extends GameContainer {
         this.spriteHeight = this.dimensions[1];
       }
     }
-    var x_offset = parseInt((this.spriteWidth - this.dimensions[0])/2);
-    var y_offset = parseInt((this.spriteHeight - this.dimensions[1])/2);
-    var loc = [this.location[0] + x_offset,this.location[1] + y_offset];
-    var rect = [this.location[0],this.location[1],this.location[0]+this.dimensions[0],this.location[1]+this.dimensions[1]];
+    var rect = [this.location[0] + this.dimOffset[0],
+                this.location[1] + this.dimOffset[1],
+                this.location[0] + this.dimOffset[0] + this.dimensions[0],
+                this.location[1] + this.dimOffset[1] + this.dimensions[1]];
 
     return rect;
   }
@@ -197,6 +206,7 @@ class Thing extends GameContainer {
     super.edit(node);
     var me = this;
     var editView = document.getElementById('editview');
+    this.getRect();
 
     var inputLabel = document.createElement("label")
     inputLabel.innerHTML = "Sprite image: ";
@@ -236,8 +246,14 @@ class Thing extends GameContainer {
 
     editView.append(inputLabel2,xInputField,yInputField,document.createElement('br'));
 
+    if (this.spriteImage){
+      var spriteDimsLabel = document.createElement("label");
+      spriteDimsLabel.innerHTML = "Sprite [width,height]: [" + this.spriteWidth + "," + this.spriteHeight + "]";
+      editView.append(spriteDimsLabel,document.createElement('br'));
+    }
+
     var inputLabel3 = document.createElement("label")
-    inputLabel3.innerHTML = "Dimensions [x,y]: ";
+    inputLabel3.innerHTML = "Collision Rectangle [width,height]: ";
 
     var xDimInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'1000'});
     xDimInputField.value = this.dimensions[0];
@@ -253,7 +269,26 @@ class Thing extends GameContainer {
       me.game.drawCollisions();
     })
 
-    editView.append(inputLabel3,xDimInputField,yDimInputField,document.createElement('br'),spriteThumbnail,document.createElement('br'));
+    editView.append(inputLabel3,xDimInputField,yDimInputField,document.createElement('br'));
+
+    var inputCollRectLoc = document.createElement("label");
+    inputCollRectLoc.innerHTML = "Collision rectangle location [x,y]: ";
+
+    var xDimInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'1000'});
+    xDimInputField.value = this.dimOffset[0];
+    xDimInputField.addEventListener("change", (event)=> {
+      me.dimOffset[0] = parseInt(event.target.value);
+      me.game.drawCollisions();
+    })
+
+    var yDimInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'1000'});
+    yDimInputField.value = this.dimOffset[1];
+    yDimInputField.addEventListener("change", (event)=> {
+      me.dimOffset[1] = parseInt(event.target.value);
+      me.game.drawCollisions();
+    })
+
+    editView.append(inputCollRectLoc,xDimInputField,yDimInputField,document.createElement('br'),spriteThumbnail,document.createElement('br'));
 
     var animateCheckbox = createElementWithAttributes('input',{'type':'checkbox'});
     animateCheckbox.checked = this.animated;
