@@ -259,16 +259,12 @@ class Game extends GameContainer {
       var player_rect = this.player.getRect();
       player_rect[0] += this.player.dx;
       player_rect[1] += this.player.dy;
-      player_rect[2] += this.player.dx;
-      player_rect[3] += this.player.dy;
 
       var dx_rect = this.player.getRect();
       dx_rect[0] += this.player.dx;
-      dx_rect[2] += this.player.dx;
 
       var dy_rect = this.player.getRect();
       dy_rect[1] += this.player.dy;
-      dy_rect[3] += this.player.dy;
 
       //check if player exceeds scene boundary
       var screenBoundaries = [0,0,this.currentScene.backgroundImage.width,this.currentScene.backgroundImage.height];
@@ -387,7 +383,8 @@ class Game extends GameContainer {
       this.playContext.fillStyle='rgba(225,225,225,0.7)';
       for (const thing_id of this.currentScene.things){
         const thing = this.things[thing_id];
-        this.playContext.fillRect(thing.location[0],thing.location[1],thing.dimensions[0],thing.dimensions[1]);
+        var tRect = thing.getRect()
+        this.playContext.fillRect(tRect[0],tRect[1],tRect[2],tRect[3]);
       }
     }
   }

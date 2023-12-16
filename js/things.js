@@ -163,8 +163,8 @@ class Thing extends GameContainer {
     }
     var rect = [this.location[0] + this.dimOffset[0],
                 this.location[1] + this.dimOffset[1],
-                this.location[0] + this.dimOffset[0] + this.dimensions[0],
-                this.location[1] + this.dimOffset[1] + this.dimensions[1]];
+                this.dimensions[0],
+                this.dimensions[1]];
 
     return rect;
   }
