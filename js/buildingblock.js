@@ -35,7 +35,7 @@ class BuildingBlock {
     nodeSpan.innerHTML = '<b>'+ this.name + ':</b> ' + this.description;
   }
 
-  display(info) { //default display method
+  getNode(info) { //default display method
 
     var node = document.createElement("div");
     var nodeName = this.type;

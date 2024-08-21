@@ -29,14 +29,14 @@ function load_game(text){
   var jstuff = JSON.parse(text);
   game = new Game();
   game.load(jstuff);
-  gameView.replaceChildren(game.display());
+  gameView.replaceChildren(game.getNode());
 }
 
 function create_new_game(){
   reset();
   var gameView = document.getElementById('gamedata');
   game = new Game();
-  gameView.replaceChildren(game.display());
+  gameView.replaceChildren(game.getNode());
 }
 
 function save_game(){

@@ -15,7 +15,7 @@ class Scene extends GameContainer {
     this.map_size = [];
     this.grid_size = null;
     this.collisions = {};
-    this.collisionDimensions = 4;
+    this.collisionDimensions = 8;
   }
 
   run(){

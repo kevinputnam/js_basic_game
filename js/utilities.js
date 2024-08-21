@@ -6,6 +6,63 @@ function createElementWithAttributes(type,att_dict){
   return el;
 }
 
+function createEditorStringInput(view,labelText,valueKey,parent){
+  var label = document.createElement('label');
+  label.innerHTML = labelText;
+  var inputField = createElementWithAttributes('input',{'type':'text','maxlength':'25','size':'17'});
+  inputField.value = parent[valueKey];
+  inputField.addEventListener("change", (event)=> {
+    parent[valueKey] = event.target.value;
+    parent.updateNodes();
+  })
+  view.append(label,inputField);
+}
+
+function createEditorOptionSelector(view,labelText,optionDict,valueKey,parent){
+  var label = document.createElement("label")
+  label.innerHTML = labelText;
+
+  var selector = document.createElement('select');
+  for (const [id,name] of Object.entries(optionDict)){
+    var s = new Option;
+    s.value = id;
+    s.innerHTML = name + "[" + id + "]";
+    selector.appendChild(s);
+    if (id == parent[valueKey]){
+      s.setAttribute('selected','true');
+    }
+  }
+  selector.addEventListener("change", (event)=> {
+    parent[valueKey] = event.target.value;
+    parent.updateNodes();
+  })
+  view.append(label,selector)
+}
+
+function createEditorCoordsInput(view,labelText,valueKey,parent){
+  var label = document.createElement("label")
+  label.innerHTML = labelText;
+
+  var xInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'10000'});
+  xInputField.value = parent[valueKey][0];
+  xInputField.addEventListener("change", (event)=> {
+    parent[valueKey][0] = event.target.value;
+    parent.updateNodes();
+    parent.game.updatePlayView();
+  });
+
+  var yInputField = createElementWithAttributes('input',{'type':'number','min':'0','max':'10000'});
+  yInputField.value = parent[valueKey][1];
+  yInputField.addEventListener("change", (event)=> {
+    parent[valueKey][1] = event.target.value;
+    parent.updateNodes();
+    parent.game.updatePlayView();
+  });
+
+  view.append(label,xInputField,yInputField);
+
+}
+
 function flipCaret(tag){
       tag.parentElement.querySelector(".nested").classList.toggle("active");
       tag.classList.toggle("caret-down");
@@ -58,3 +115,4 @@ function listOfListsString(lists){
   output += "]";
   return output;
 }
+

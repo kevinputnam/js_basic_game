@@ -518,13 +518,13 @@ class Game extends GameContainer {
     nodeSpan.innerHTML = '<b>'+this.name+ ':</b> ' + this.description;
   }
 
-  display() {
-    var node = super.display();
+  getNode() {
+    var node = super.getNode();
 
     var thingNodes = this.getChildContainer(node,'things');
     if (this.things){
       for (const [id,thing] of Object.entries(this.things)){
-        var thingNode = thing.display('game');
+        var thingNode = thing.getNode('game');
         thingNodes.append(thingNode);
       }
     }
@@ -542,7 +542,7 @@ class Game extends GameContainer {
     node.append(player_tv);
 
     if (this.player){
-      var playerNode = this.player.display('game');
+      var playerNode = this.player.getNode('game');
       playerNodes.append(playerNode);
     }
 
@@ -559,7 +559,7 @@ class Game extends GameContainer {
     node.append(scene_tv);
     if (this.scenes){
       for (const [id,scene] of Object.entries(this.scenes)){
-        var sceneNode = scene.display();
+        var sceneNode = scene.getNode();
         sceneNodes.append(sceneNode);
       }
     }
@@ -622,13 +622,13 @@ class Game extends GameContainer {
     var scene = new Scene({'parent':this,'game':this});
     this.scenes[scene.id]=scene;
     var sceneNodes = this.getChildContainer(this.nodes[0],'scenes');
-    sceneNodes.append(scene.display());
+    sceneNodes.append(scene.getNode());
   }
 
   addNewThing(thing){
     this.things[thing.id]=thing;
     var thingNodes = this.getChildContainer(this.nodes[0],'things');
-    thingNodes.append(thing.display('game'));
+    thingNodes.append(thing.getNode('game'));
     this.edit(this.currentNode);
   }
 }

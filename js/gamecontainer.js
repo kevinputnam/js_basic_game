@@ -28,8 +28,8 @@ class GameContainer extends BuildingBlock{
   nodeSpan.innerHTML = '<b>'+this.name+'[' + this.id + ']:</b> ' + this.description;
   }
 
-  display(info) {
-    var node = super.display(info);
+  getNode(info) {
+    var node = super.getNode(info);
 
     var thing_sp = document.createElement('span')
     var thing_tv = document.createElement('div');
@@ -57,7 +57,7 @@ class GameContainer extends BuildingBlock{
 
     if (this.actions){
       for (var action of this.actions){
-        actionNodes.append(action.display());
+        actionNodes.append(action.getNode());
       }
     }
 
@@ -66,7 +66,7 @@ class GameContainer extends BuildingBlock{
       if (this.things){
         for (var thing_id of this.things){
           this.game.things[thing_id].parent = this;
-          thingNodes.append(this.game.things[thing_id].display());
+          thingNodes.append(this.game.things[thing_id].getNode());
         }
       }
     }
@@ -134,7 +134,7 @@ class GameContainer extends BuildingBlock{
     this.actions.push(new_action);
     for (const node of this.nodes){
       var actionNodes = this.getChildContainer(node,'actions');
-      actionNodes.append(new_action.display());
+      actionNodes.append(new_action.getNode());
     }
   }
 
@@ -145,7 +145,7 @@ class GameContainer extends BuildingBlock{
       this.game.things[thing_id].parent = this;
       for (const node of this.nodes){
         var thingNodes = this.getChildContainer(node,'things');
-        thingNodes.append(this.game.things[thing_id].display());
+        thingNodes.append(this.game.things[thing_id].getNode());
       }
     }
     //this.edit(this.currentNode);
@@ -158,7 +158,7 @@ class GameContainer extends BuildingBlock{
       this.things.push(newT.id);
       for (var node of this.nodes){
         var thingNodes = this.getChildContainer(node,'things');
-       thingNodes.append(newT.display());
+       thingNodes.append(newT.getNode());
       }
     }
     this.game.addNewThing(newT);
