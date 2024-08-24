@@ -140,7 +140,7 @@ class Action extends BuildingBlock{
     if(this.parent){
       this.parent.actions.splice(this.parent.actions.indexOf(this),1);
     }
-    var editView = document.getElementById('editview');
+    var editView = document.getElementById('editactionview');
     editView.replaceChildren();
   }
 
