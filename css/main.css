@@ -7,8 +7,8 @@ html {
     background-color: #ffffff;
     color: #000000;
     font: 12px/14px monospace;
-    width:1200px; /* or whatever width you want. */
-    max-width:1200px; /* or whatever width you want. */
+    width:1600px; /* or whatever width you want. */
+    max-width:1600px; /* or whatever width you want. */
     height: 850px;
     max-height:  850px;
     padding: 10px;
@@ -19,10 +19,10 @@ html {
     position: absolute;
     left: 10px;
     top:  30px;
-    width: 400px;
+    width: 370px;
     height: 800px;
     max-height: 800px;
-    max-width: 400px;
+    max-width: 370px;
     border:  1px solid #000000;
     padding:  10px;
     -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
@@ -36,7 +36,7 @@ html {
 #editview {
     overflow: scroll;
     position: absolute;
-    left: 440px;
+    left: 410px;
     top: 30px;
     width: 750px;
     height: 270px;
@@ -65,7 +65,7 @@ div .editsave {
 #mapview {
     overflow: scroll;
     position: absolute;
-    left: 440px;
+    left: 410px;
     top: 330px;
     width: 750px;
     height: 500px;
@@ -76,6 +76,40 @@ div .editsave {
 }
 
 #mapview::-webkit-scrollbar {
+    display:none; /*hides scroll bars for webkit browsers*/
+}
+
+#actionview {
+    overflow: scroll;
+    position: absolute;
+    left: 1190px;
+    top: 30px;
+    width: 400px;
+    height: 580px;
+    padding: 10px;
+    border:  1px solid #000000;
+    -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
+    scrollbar-width: none; /*hides scroll bars for firefox*/
+}
+
+#actionview::-webkit-scrollbar {
+    display:none; /*hides scroll bars for webkit browsers*/
+}
+
+#editactionview {
+    overflow: scroll;
+    position: absolute;
+    left: 1190px;
+    top: 640px;
+    width: 400px;
+    height: 190px;
+    padding: 10px;
+    border:  1px solid #000000;
+    -ms-overflow-style: none; /*hides scroll bars for ms browsers*/
+    scrollbar-width: none; /*hides scroll bars for firefox*/
+}
+
+#editactionview::-webkit-scrollbar {
     display:none; /*hides scroll bars for webkit browsers*/
 }
 

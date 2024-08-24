@@ -91,7 +91,7 @@ class Action extends BuildingBlock{
 
   edit(node){
     super.edit(node);
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
     editView.replaceChildren();
 
     var title = document.createElement("span");
@@ -209,7 +209,7 @@ class Action_set_var extends Action {
   edit(node) {
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     createEditorStringInput(editView,"Variable name:", 'variable', this);
     createEditorStringInput(editView,"Value:",'value',this);
@@ -248,7 +248,7 @@ class Action_move_thing extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
     let newDict = {}
     for (const key in this.game.things){
       newDict[key] = this.game.things[key].name;
@@ -299,7 +299,7 @@ class Action_change_scene extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     let newDict = {};
     for(const key in this.game.scenes){
@@ -368,7 +368,7 @@ class Action_menu extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     var inputLabel = document.createElement('label');
     inputLabel.innerHTML = "Result varaible: ";
@@ -475,7 +475,7 @@ class Action_message extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     var inputLabel = document.createElement("label")
     inputLabel.innerHTML = "Message: ";
@@ -548,7 +548,7 @@ class Action_start_timer extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     var inputLabel = document.createElement("label")
     inputLabel.innerHTML = "Milliseconds: ";
@@ -644,7 +644,7 @@ class Action_if_eval extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     var inputLabel1 = document.createElement("label")
     inputLabel1.innerHTML = "Value 1: ";
@@ -764,7 +764,7 @@ class Action_switch extends Action {
     edit(node) {
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     var inputLabel = document.createElement('label');
     inputLabel.innerHTML = "Variable name: ";
@@ -807,7 +807,7 @@ class Action_case extends Action {
   edit(node) {
     super.edit(node);
     var me = this;
-    var editView = document.getElementById("editview");
+    var editView = document.getElementById("editactionview");
 
     var inputLabel = document.createElement('label');
     inputLabel.innerHTML = "Value: ";
@@ -876,7 +876,7 @@ class Action_has_thing extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById('editview');
+    var editView = document.getElementById('editactionview');
 
     var inputLabel = document.createElement('label');
     inputLabel.innerHTML = "Variable: ";
@@ -1012,7 +1012,7 @@ class Action_put_thing extends Action {
   edit(node){
     super.edit(node);
     var me = this;
-    var editView = document.getElementById('editview');
+    var editView = document.getElementById('editactionview');
 
     var inputLabel = document.createElement("label")
     inputLabel.innerHTML = "Add thing: ";

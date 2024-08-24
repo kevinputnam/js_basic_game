@@ -54,24 +54,6 @@ function save_game(){
   }
 }
 
-function run_game(){
-  if(game){
-    game_data = game.save();
-    args = {};
-    args['disable_editing'] = disable_editing;
-    args['enable_editing'] = enable_editing;
-    //disable editing
-    game.run(args);
-    //re-enable editing
-  }
-}
-
-function stop_game(){
-  if(game){
-    game.stop();
-  }
-}
-
 function disable_editing(){
   loadbtn.disabled = true;
   savebtn.disabled = true;
