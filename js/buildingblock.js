@@ -71,8 +71,10 @@ class BuildingBlock {
       "click",
       function () {
         me.remove();
-        var editView = document.getElementById('editview');
-        editView.replaceChildren();
+        if (me.type != 'Action'){
+          var editView = document.getElementById('editview');
+          editView.replaceChildren();
+        }
       },
       false,
     );

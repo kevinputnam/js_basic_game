@@ -43,24 +43,6 @@ class GameContainer extends BuildingBlock{
     thing_tv.append(thingNodes);
     node.append(thing_tv);
 
-    var action_sp = document.createElement('span')
-    var action_tv = document.createElement('div');
-    action_sp.setAttribute('class','caret');
-    action_sp.setAttribute('onclick','flipCaret(this)');
-    action_sp.innerHTML = 'Actions';
-    action_tv.append(action_sp)
-
-    var actionNodes = document.createElement('div');
-    actionNodes.setAttribute('class','nested actions');
-    action_tv.append(actionNodes)
-    node.append(action_tv);
-
-    if (this.actions){
-      for (var action of this.actions){
-        actionNodes.append(action.getNode());
-      }
-    }
-
     // allows the Game class to use this prototype
     if (Array.isArray(this.things)){
       if (this.things){
@@ -132,10 +114,8 @@ class GameContainer extends BuildingBlock{
     var data = {'parent':this,'game':this.game};
     var new_action = eval("new " + action_type + "(data)");
     this.actions.push(new_action);
-    for (const node of this.nodes){
-      var actionNodes = this.getChildContainer(node,'actions');
-      actionNodes.append(new_action.getNode());
-    }
+    var actionNodes = this.getChildContainer(document.getElementById('actionview'),'actions');
+    actionNodes.append(new_action.getNode());
   }
 
   addThing(thing_id){
@@ -225,6 +205,20 @@ class GameContainer extends BuildingBlock{
 
     editView.append(newThingBtn,document.createElement('br'));
 
+    var action_sp = document.createElement('span')
+    var action_tv = document.createElement('div');
+    action_sp.innerHTML = '<b>' + this.type + ': ' + this.name + ' - Actions </b>';
+    action_tv.append(action_sp)
+
+    var actionNodes = document.createElement('div');
+    actionNodes.setAttribute('class','actions');
+    action_tv.append(actionNodes);
+    var actionView = document.getElementById("actionview");
+    actionView.replaceChildren();
+    var editActionView = document.getElementById("editactionview");
+    editActionView.replaceChildren();
+    actionView.append(action_tv);
+
     if (this.actions){
       this.newActionSelector = document.createElement('select');
       for (const aType of action_types){
@@ -243,6 +237,10 @@ class GameContainer extends BuildingBlock{
         false,
       );
       editView.append(this.newActionSelector,addActionButton,document.createElement('br'),document.createElement('br'));
+
+      for (var action of this.actions){
+        actionNodes.append(action.getNode());
+      }
     }
 
     var inputLabel = document.createElement("label")
