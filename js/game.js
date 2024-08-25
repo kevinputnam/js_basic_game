@@ -23,7 +23,12 @@ class Game extends GameContainer {
     this.textFontSize = 10;
     this.textFont = this.textFontSize + "px courier";
     this.currentMessage = null;
-    this.createPlayContext();
+
+    var editor = false;
+    if (data && "editor" in data){
+      editor = data["editor"];
+    }
+    this.createPlayContext(editor);
     this.runStack = [];
     this.variables = {};
     this.runStackPaused = false;
@@ -303,7 +308,7 @@ class Game extends GameContainer {
     }
   }
 
-  createPlayContext(){
+  createPlayContext(editor){
     var playView = document.getElementById('mapview');
     if (this.canvas){
       this.playContext.remove;
@@ -311,8 +316,14 @@ class Game extends GameContainer {
     }
     this.canvas = document.createElement("canvas");
     this.canvas.setAttribute('id','map');
-    this.canvas.setAttribute('width','720');
-    this.canvas.setAttribute('height','480');
+    if (editor==true){
+      this.canvas.setAttribute('width','4000');
+      this.canvas.setAttribute('height','4000');
+      this.screenDimensions = [2000,2000];
+    }else{
+      this.canvas.setAttribute('width','720');
+      this.canvas.setAttribute('height','480');
+    }
     playView.append(this.canvas);
     this.playContext = this.canvas.getContext("2d");
     this.playContext.scale(this.ctxScaling,this.ctxScaling);
@@ -322,6 +333,7 @@ class Game extends GameContainer {
   }
 
   updatePlayView(){
+    this.playContext.clearRect(0,0,this.screenDimensions[0],this.screenDimensions[1]);
     if (this.currentScene){
       if(this.currentScene.backgroundImage){
         this.playContext.drawImage(this.currentScene.backgroundImage, 0,0);
@@ -336,8 +348,6 @@ class Game extends GameContainer {
       }
       this.drawMessage();
       this.drawMenu();
-    }else{
-      this.playContext.clearRect(0,0,this.screenDimensions[0],this.screenDimensions[1]);
     }
   }
 
