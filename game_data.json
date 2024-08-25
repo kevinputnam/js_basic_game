@@ -1757,6 +1757,18 @@
           "val1": "`$has_boardingpass`",
           "val2": "true",
           "operator": "=="
+        },
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "Welcome to Galactic Telecom",
+            "",
+            "  1. Boarding pass? `$bp`",
+            "  2. Medical supplies? `$sp`",
+            "",
+            "Your credit balance: `$player_credits`"
+          ]
         }
       ],
       "id": 24,
