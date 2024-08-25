@@ -321,7 +321,10 @@ class Thing extends GameContainer {
       me.spriteHeight = me.spriteImage.height/me.spriteRows;
     })
 
-    editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'));
+    var animationListLabel = document.createElement("label");
+    animationListLabel.innerHTML = '[[row,column],...';
+
+    editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'),animationListLabel, document.createElement('br'));
 
     var downLabel = document.createElement("label");
     downLabel.innerHTML = "Down: ";
