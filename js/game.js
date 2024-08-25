@@ -359,24 +359,20 @@ class Game extends GameContainer {
           if (map_offset_x > 0){
             player_offset_x = -1* map_offset_x;
             map_offset_x = 0;
-            console.log('move left');
           //if the map can't move any further - move the player right (+)
           } else if (map_offset_x < max_map_x){
             player_offset_x = -1*(map_offset_x - max_map_x);
             map_offset_x = max_map_x;
-            console.log('move right');
           }
 
           //if the map needs to move down - move player up (-)
           if (map_offset_y > 0){
             player_offset_y = -1*map_offset_y;
             map_offset_y = 0;
-            console.log('move up');
           //if the map can't move any further - move the player down (+)
           } else if (map_offset_y < max_map_y){
             player_offset_y = -1*(map_offset_y - max_map_y);
             map_offset_y = max_map_y;
-            console.log('move down');
           }
 
         }
