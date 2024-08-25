@@ -300,7 +300,7 @@
           "choices": [
             "1: Storage status",
             "2: Submit requisition",
-            "3: Billing",
+            "3: Banking",
             "4: Exit"
           ],
           "prompt": [
@@ -345,8 +345,82 @@
                   "name": "Action_message",
                   "actions": null,
                   "text_lines": [
-                    "Billing"
+                    "Welcome to Interstellar",
+                    "       Bank and Trust",
+                    "",
+                    "*** unauthorized use ***",
+                    "*** of this system ***",
+                    "*** will result in ***",
+                    "*** immediate ***",
+                    "*** prosecution ***"
                   ]
+                },
+                {
+                  "name": "Action_menu",
+                  "actions": null,
+                  "choices": [
+                    "Bonaventure, Jim",
+                    "Lighter, Felix",
+                    "Fowler, Morgan",
+                    "Winston, Jean"
+                  ],
+                  "prompt": [
+                    "Choose a user:"
+                  ],
+                  "variable": "mc",
+                  "useValue": false
+                },
+                {
+                  "name": "Action_switch",
+                  "actions": [
+                    {
+                      "name": "Action_case",
+                      "actions": [
+                        {
+                          "name": "Action_menu",
+                          "actions": null,
+                          "choices": [
+                            "Transaction log",
+                            "Add funds (500c)",
+                            "Remove funds (500c)",
+                            "Tag account"
+                          ],
+                          "prompt": [
+                            "Choose an option:"
+                          ],
+                          "variable": "mc",
+                          "useValue": false
+                        },
+                        {
+                          "name": "Action_switch",
+                          "actions": [
+                            {
+                              "name": "Action_case",
+                              "actions": [
+                                {
+                                  "name": "Action_message",
+                                  "actions": null,
+                                  "text_lines": [
+                                    "500c added to account."
+                                  ]
+                                },
+                                {
+                                  "name": "Action_set_var",
+                                  "actions": null,
+                                  "variable": "player_credits",
+                                  "value": "`$player_credits` + 500"
+                                }
+                              ],
+                              "value": "1"
+                            }
+                          ],
+                          "variable": "mc"
+                        }
+                      ],
+                      "value": "2"
+                    }
+                  ],
+                  "variable": "mc"
                 }
               ],
               "value": "2"
@@ -1683,18 +1757,6 @@
           "val1": "`$has_boardingpass`",
           "val2": "true",
           "operator": "=="
-        },
-        {
-          "name": "Action_message",
-          "actions": null,
-          "text_lines": [
-            "Welcome to Galactic Telecom",
-            "",
-            "1. Boarding pass? `$bp`",
-            "2. Medical supplies? `$sp`",
-            "",
-            "Your credit balance: `$player_credits`"
-          ]
         }
       ],
       "id": 24,
@@ -3741,7 +3803,6 @@
       "name": "Comm Center",
       "description": "Check your messages",
       "things": [
-        26,
         24,
         27
       ],
