@@ -366,18 +366,20 @@ class Game extends GameContainer {
         if(this.currentScene.backgroundImage){
           var collisions = this.currentScene.collisions;
           var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
-          var collClickX = Math.floor(event.offsetX/collisionLocScale);
-          var collClickY = Math.floor(event.offsetY/collisionLocScale);
-          if (!this.addingCollisions && !this.removingCollisions){
-            if(!Object.keys(collisions).includes(collClickX.toString())){
-              collisions[collClickX] = [collClickY];
-              this.addingCollisions = true;
-            }else if (!collisions[collClickX].includes(collClickY)){
-              this.addingCollisions = true;
-              collisions[collClickX].push(collClickY);
-            }else{
-              this.removingCollisions = true;
-              collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+          if(event.offsetX/this.ctxScaling < this.currentScene.backgroundImage.width && event.offsetY/this.ctxScaling < this.currentScene.backgroundImage.height){
+            var collClickX = Math.floor(event.offsetX/collisionLocScale);
+            var collClickY = Math.floor(event.offsetY/collisionLocScale);
+            if (!this.addingCollisions && !this.removingCollisions){
+              if(!Object.keys(collisions).includes(collClickX.toString())){
+                collisions[collClickX] = [collClickY];
+                this.addingCollisions = true;
+              }else if (!collisions[collClickX].includes(collClickY)){
+                this.addingCollisions = true;
+                collisions[collClickX].push(collClickY);
+              }else{
+                this.removingCollisions = true;
+                collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+              }
             }
           }
         }
@@ -391,23 +393,25 @@ class Game extends GameContainer {
         if(this.currentScene.backgroundImage){
           var collisions = this.currentScene.collisions;
           var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
-          var collClickX = Math.floor(event.offsetX/collisionLocScale);
-          var collClickY = Math.floor(event.offsetY/collisionLocScale);
-          if (this.addingCollisions){
-            if(!Object.keys(collisions).includes(collClickX.toString())){
-              collisions[collClickX] = [collClickY];
-            } else if(!collisions[collClickX].includes(collClickY)){
-              collisions[collClickX].push(collClickY);
+          if(event.offsetX/this.ctxScaling < this.currentScene.backgroundImage.width && event.offsetY/this.ctxScaling < this.currentScene.backgroundImage.height){
+            var collClickX = Math.floor(event.offsetX/collisionLocScale);
+            var collClickY = Math.floor(event.offsetY/collisionLocScale);
+            if (this.addingCollisions){
+              if(!Object.keys(collisions).includes(collClickX.toString())){
+                collisions[collClickX] = [collClickY];
+              } else if(!collisions[collClickX].includes(collClickY)){
+                collisions[collClickX].push(collClickY);
+              }
             }
-          }
-          if (this.removingCollisions){
-            if(Object.keys(collisions).includes(collClickX.toString())){
-              if(collisions[collClickX].includes(collClickY)){
-                collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
-             }
+            if (this.removingCollisions){
+              if(Object.keys(collisions).includes(collClickX.toString())){
+                if(collisions[collClickX].includes(collClickY)){
+                  collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+               }
+              }
             }
+            this.drawCollisions();
           }
-          this.drawCollisions();
         }
       }
     }
