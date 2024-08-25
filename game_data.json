@@ -486,7 +486,17 @@
       "name": "Planet Jumper Tavern",
       "description": "A good place to get a drink or lose a few teeth.",
       "things": [],
-      "actions": [],
+      "actions": [
+        {
+          "name": "Action_change_scene",
+          "actions": null,
+          "scene_id": "2",
+          "player_pos": [
+            100,
+            130
+          ]
+        }
+      ],
       "id": 7,
       "hidden": false,
       "trigger": false,
@@ -2016,7 +2026,7 @@
     }
   },
   "player": {
-    "name": "Morgan Fowler",
+    "name": "Jane Fowler",
     "description": "Doctor, adventurer.",
     "things": [],
     "actions": [],
@@ -2028,30 +2038,26 @@
       0
     ],
     "dimensions": [
-      15,
-      27
+      16,
+      16
     ],
     "dimOffset": [
-      2,
-      3
+      0,
+      0
     ],
-    "spritePath": "assets/sprites/morgans.png",
+    "spritePath": "assets/sprites/jane_fowler_sprite.png",
     "animated": true,
-    "spriteRows": 4,
-    "spritesPerRow": 3,
+    "spriteRows": 8,
+    "spritesPerRow": 1,
     "animations": {
       "up": [
         [
-          3,
+          2,
           0
         ],
         [
           3,
-          1
-        ],
-        [
-          3,
-          2
+          0
         ]
       ],
       "down": [
@@ -2060,46 +2066,34 @@
           0
         ],
         [
-          0,
-          1
-        ],
-        [
-          0,
-          2
+          1,
+          0
         ]
       ],
       "left": [
         [
-          1,
+          6,
           0
         ],
         [
-          1,
-          1
-        ],
-        [
-          1,
-          2
+          7,
+          0
         ]
       ],
       "right": [
         [
-          2,
+          4,
           0
         ],
         [
-          2,
-          1
-        ],
-        [
-          2,
-          2
+          5,
+          0
         ]
       ]
     },
     "spriteDim": [
-      18,
-      32
+      16,
+      16
     ]
   },
   "scenes": {
@@ -4052,7 +4046,8 @@
       "description": "Check your messages",
       "things": [
         24,
-        27
+        27,
+        26
       ],
       "actions": [],
       "id": 13,
