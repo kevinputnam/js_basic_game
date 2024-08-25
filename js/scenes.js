@@ -91,7 +91,10 @@ class Scene extends GameContainer {
       me.backgroundImage.setAttribute('src',event.target.value);
     })
 
-    editView.append(inputLabel,imageFileInputField,document.createElement('br'),backgroundThumbnail,document.createElement('br'));
+    var imageAttrLabel = document.createElement("label")
+    imageAttrLabel.innerHTML = "Image width: " + this.backgroundImage.width + " Image height: " + this.backgroundImage.height;
+
+    editView.append(inputLabel,imageFileInputField,document.createElement('br'),backgroundThumbnail,document.createElement('br'),imageAttrLabel,document.createElement('br'));
     editView.append(this.createRemoveButton(),document.createElement('br'),document.createElement('br'));
 
     this.game.drawCollisions();

@@ -169,7 +169,7 @@ class Thing extends GameContainer {
     return rect;
   }
 
-  draw(ctx){
+  draw(ctx,draw_x,draw_y){
     if (this.animated){
       var animation = this.animations[this.direction];
       var numFrames = this.animations[this.direction].length;
@@ -189,13 +189,13 @@ class Thing extends GameContainer {
                     animation[this.animationFrame][0] * this.spriteHeight,
                     this.spriteWidth,
                     this.spriteHeight,
-                    this.location[0],
-                    this.location[1],
+                    draw_x,
+                    draw_y,
                     this.spriteWidth,
                     this.spriteHeight);
     }else{
       if(this.spriteImage){
-        ctx.drawImage(this.spriteImage,this.location[0],this.location[1]);
+        ctx.drawImage(this.spriteImage,draw_x,draw_y);
       }
     }
   }
@@ -321,7 +321,10 @@ class Thing extends GameContainer {
       me.spriteHeight = me.spriteImage.height/me.spriteRows;
     })
 
-    editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'));
+    var animationListLabel = document.createElement("label");
+    animationListLabel.innerHTML = '[[row,column],...';
+
+    editView.append(inputLabel4,framesPerRowInputField,document.createElement('br'),inputLabel5,frameRowsInputField,document.createElement('br'),animationListLabel, document.createElement('br'));
 
     var downLabel = document.createElement("label");
     downLabel.innerHTML = "Down: ";

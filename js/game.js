@@ -23,7 +23,12 @@ class Game extends GameContainer {
     this.textFontSize = 10;
     this.textFont = this.textFontSize + "px courier";
     this.currentMessage = null;
-    this.createPlayContext();
+
+    var editor = false;
+    if (data && "editor" in data){
+      editor = data["editor"];
+    }
+    this.createPlayContext(editor);
     this.runStack = [];
     this.variables = {};
     this.runStackPaused = false;
@@ -303,7 +308,7 @@ class Game extends GameContainer {
     }
   }
 
-  createPlayContext(){
+  createPlayContext(editor){
     var playView = document.getElementById('mapview');
     if (this.canvas){
       this.playContext.remove;
@@ -311,8 +316,14 @@ class Game extends GameContainer {
     }
     this.canvas = document.createElement("canvas");
     this.canvas.setAttribute('id','map');
-    this.canvas.setAttribute('width','720');
-    this.canvas.setAttribute('height','480');
+    if (editor==true){
+      this.canvas.setAttribute('width','4000');
+      this.canvas.setAttribute('height','4000');
+      this.screenDimensions = [2000,2000];
+    }else{
+      this.canvas.setAttribute('width','720');
+      this.canvas.setAttribute('height','480');
+    }
     playView.append(this.canvas);
     this.playContext = this.canvas.getContext("2d");
     this.playContext.scale(this.ctxScaling,this.ctxScaling);
@@ -322,22 +333,66 @@ class Game extends GameContainer {
   }
 
   updatePlayView(){
+    this.playContext.clearRect(0,0,this.screenDimensions[0],this.screenDimensions[1]);
+
+
+    var map_offset_x = 0;
+    var map_offset_y = 0;
+    var player_offset_x = 0;
+    var player_offset_y = 0;
+
     if (this.currentScene){
       if(this.currentScene.backgroundImage){
-        this.playContext.drawImage(this.currentScene.backgroundImage, 0,0);
+
+        if (this.running){
+          //Calculate offsets to make sure camera stays centered on player during game play
+
+          //max offsets for the map
+          var max_map_x = this.screenDimensions[0] - this.currentScene.backgroundImage.width;
+          var max_map_y = this.screenDimensions[1] - this.currentScene.backgroundImage.height;
+
+          //shift map under player at center screen
+          var map_offset_x = Math.round(this.screenDimensions[0]/2 - this.player.location[0]);
+          var map_offset_y = Math.round(this.screenDimensions[1]/2 - this.player.location[1]);
+
+          //if the map needs to move to the right - move player left (-)
+          if (map_offset_x > 0){
+            player_offset_x = -1* map_offset_x;
+            map_offset_x = 0;
+          //if the map can't move any further - move the player right (+)
+          } else if (map_offset_x < max_map_x){
+            player_offset_x = -1*(map_offset_x - max_map_x);
+            map_offset_x = max_map_x;
+          }
+
+          //if the map needs to move down - move player up (-)
+          if (map_offset_y > 0){
+            player_offset_y = -1*map_offset_y;
+            map_offset_y = 0;
+          //if the map can't move any further - move the player down (+)
+          } else if (map_offset_y < max_map_y){
+            player_offset_y = -1*(map_offset_y - max_map_y);
+            map_offset_y = max_map_y;
+          }
+
+        }
+
+        this.playContext.drawImage(this.currentScene.backgroundImage, map_offset_x,map_offset_y);
       }
 
       for (const thing_id of this.currentScene.things){
         var thing = game.things[thing_id];
-        thing.draw(this.playContext);
+        var draw_x = thing.location[0] + map_offset_x;
+        var draw_y = thing.location[1] + map_offset_y;
+        thing.draw(this.playContext,draw_x,draw_y);
       }
       if(this.currentScene.draw_player){
-        this.player.draw(this.playContext);
+        var draw_x = this.screenDimensions[0]/2 + player_offset_x;
+        var draw_y = this.screenDimensions[1]/2 + player_offset_y;
+        this.player.draw(this.playContext,draw_x,draw_y);
       }
       this.drawMessage();
       this.drawMenu();
-    }else{
-      this.playContext.clearRect(0,0,this.screenDimensions[0],this.screenDimensions[1]);
     }
   }
 
@@ -356,18 +411,20 @@ class Game extends GameContainer {
         if(this.currentScene.backgroundImage){
           var collisions = this.currentScene.collisions;
           var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
-          var collClickX = Math.floor(event.offsetX/collisionLocScale);
-          var collClickY = Math.floor(event.offsetY/collisionLocScale);
-          if (!this.addingCollisions && !this.removingCollisions){
-            if(!Object.keys(collisions).includes(collClickX.toString())){
-              collisions[collClickX] = [collClickY];
-              this.addingCollisions = true;
-            }else if (!collisions[collClickX].includes(collClickY)){
-              this.addingCollisions = true;
-              collisions[collClickX].push(collClickY);
-            }else{
-              this.removingCollisions = true;
-              collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+          if(event.offsetX/this.ctxScaling < this.currentScene.backgroundImage.width && event.offsetY/this.ctxScaling < this.currentScene.backgroundImage.height){
+            var collClickX = Math.floor(event.offsetX/collisionLocScale);
+            var collClickY = Math.floor(event.offsetY/collisionLocScale);
+            if (!this.addingCollisions && !this.removingCollisions){
+              if(!Object.keys(collisions).includes(collClickX.toString())){
+                collisions[collClickX] = [collClickY];
+                this.addingCollisions = true;
+              }else if (!collisions[collClickX].includes(collClickY)){
+                this.addingCollisions = true;
+                collisions[collClickX].push(collClickY);
+              }else{
+                this.removingCollisions = true;
+                collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+              }
             }
           }
         }
@@ -381,23 +438,25 @@ class Game extends GameContainer {
         if(this.currentScene.backgroundImage){
           var collisions = this.currentScene.collisions;
           var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
-          var collClickX = Math.floor(event.offsetX/collisionLocScale);
-          var collClickY = Math.floor(event.offsetY/collisionLocScale);
-          if (this.addingCollisions){
-            if(!Object.keys(collisions).includes(collClickX.toString())){
-              collisions[collClickX] = [collClickY];
-            } else if(!collisions[collClickX].includes(collClickY)){
-              collisions[collClickX].push(collClickY);
+          if(event.offsetX/this.ctxScaling < this.currentScene.backgroundImage.width && event.offsetY/this.ctxScaling < this.currentScene.backgroundImage.height){
+            var collClickX = Math.floor(event.offsetX/collisionLocScale);
+            var collClickY = Math.floor(event.offsetY/collisionLocScale);
+            if (this.addingCollisions){
+              if(!Object.keys(collisions).includes(collClickX.toString())){
+                collisions[collClickX] = [collClickY];
+              } else if(!collisions[collClickX].includes(collClickY)){
+                collisions[collClickX].push(collClickY);
+              }
             }
-          }
-          if (this.removingCollisions){
-            if(Object.keys(collisions).includes(collClickX.toString())){
-              if(collisions[collClickX].includes(collClickY)){
-                collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
-             }
+            if (this.removingCollisions){
+              if(Object.keys(collisions).includes(collClickX.toString())){
+                if(collisions[collClickX].includes(collClickY)){
+                  collisions[collClickX].splice(collisions[collClickX].indexOf(collClickY),1);
+               }
+              }
             }
+            this.drawCollisions();
           }
-          this.drawCollisions();
         }
       }
     }
