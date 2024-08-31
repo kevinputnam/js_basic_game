@@ -4615,5 +4615,20 @@
         ]
       }
     }
+  },
+  "callbacks": {
+    "on_select_button": {
+      "name": "on_select_button",
+      "description": "Called when the game select button is pushed during normal play.",
+      "actions": [
+        {
+          "name": "Action_message",
+          "actions": null,
+          "text_lines": [
+            "Hi!"
+          ]
+        }
+      ]
+    }
   }
 }

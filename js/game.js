@@ -6,12 +6,17 @@ class Game extends GameContainer {
 
     this.type = "Game";
 
+    this.game = this;
     this.author = "";
     this.scenes = {};
     this.things = {};
+    this.callbacks = {};
+    var cb = new Callback({'parent':this,'game':this.game});
+    cb.name = "on_select_button";
+    cb.description = "Called when the game select button is pushed during normal play.";
+    this.callbacks[cb.name]=cb;
     this.first_scene = null;
     this.start_player_pos = [0,0];
-    this.game = this;
     this.screenDimensions = [360,240];
     this.canvas = null;
     this.playContext = null;
@@ -585,7 +590,7 @@ class Game extends GameContainer {
     //2. load game
     //3. show inventory
     //
-    console.log("do something");
+    this.callbacks["on_select_button"].run();
   }
 
 
@@ -639,6 +644,24 @@ class Game extends GameContainer {
       }
     }
 
+    var callback_sp = document.createElement('span')
+    var callback_tv = document.createElement('div');
+    callback_sp.setAttribute('class','caret');
+    callback_sp.setAttribute('onclick','flipCaret(this)');
+    callback_sp.innerHTML = 'Callbacks';
+    callback_tv.append(callback_sp)
+
+    var callbackNodes = document.createElement('div');
+    callbackNodes.setAttribute('class','nested callbacks');
+    callback_tv.append(callbackNodes)
+    node.append(callback_tv);
+    if (this.callbacks){
+      for (const [callbacktype,callback] of Object.entries(this.callbacks)){
+        var callbackNode = callback.getNode();
+        callbackNodes.append(callbackNode);
+      }
+    }
+
     return node;
   }
 
@@ -670,6 +693,12 @@ class Game extends GameContainer {
       newScene.load(scene_data);
       this.scenes[newScene.id] = newScene;
     }
+
+    if ("callbacks" in data){
+      if ("on_select_button" in data["callbacks"]){
+        this.callbacks["on_select_button"].load(data["callbacks"]["on_select_button"]);
+      }
+    }
   }
 
   save() {
@@ -689,6 +718,12 @@ class Game extends GameContainer {
       scenes[key] = value.save();
     }
     data['scenes'] = scenes;
+
+    var cbs = {}
+    for (const [key,value] of Object.entries(this.callbacks)){
+      cbs[key] = value.save();
+    }
+    data['callbacks'] = cbs;
 
     return data;
   }

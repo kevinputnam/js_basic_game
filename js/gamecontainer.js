@@ -31,24 +31,26 @@ class GameContainer extends BuildingBlock{
   getNode(info) {
     var node = super.getNode(info);
 
-    var thing_sp = document.createElement('span')
-    var thing_tv = document.createElement('div');
-    thing_sp.setAttribute('class','caret');
-    thing_sp.setAttribute('onclick','flipCaret(this)');
-    thing_sp.innerHTML = 'Things';
-    thing_tv.append(thing_sp);
+    if (this.type != "Callback"){
+      var thing_sp = document.createElement('span')
+      var thing_tv = document.createElement('div');
+      thing_sp.setAttribute('class','caret');
+      thing_sp.setAttribute('onclick','flipCaret(this)');
+      thing_sp.innerHTML = 'Things';
+      thing_tv.append(thing_sp);
 
-    var thingNodes = document.createElement('div');
-    thingNodes.setAttribute('class','nested things');
-    thing_tv.append(thingNodes);
-    node.append(thing_tv);
+      var thingNodes = document.createElement('div');
+      thingNodes.setAttribute('class','nested things');
+      thing_tv.append(thingNodes);
+      node.append(thing_tv);
 
-    // allows the Game class to use this prototype
-    if (Array.isArray(this.things)){
-      if (this.things){
-        for (var thing_id of this.things){
-          this.game.things[thing_id].parent = this;
-          thingNodes.append(this.game.things[thing_id].getNode());
+      // allows the Game class to use this prototype
+      if (Array.isArray(this.things)){
+        if (this.things){
+          for (var thing_id of this.things){
+            this.game.things[thing_id].parent = this;
+            thingNodes.append(this.game.things[thing_id].getNode());
+          }
         }
       }
     }
@@ -177,33 +179,34 @@ class GameContainer extends BuildingBlock{
       editView.append(newSceneBtn,document.createElement('br'));
     }
 
+    if (this.type != 'Callback'){
+      if (this.type!='Game'){
+        this.addThingSelector = this.buildThingSelector(this.game.things);
 
-    if (this.type!='Game'){
-      this.addThingSelector = this.buildThingSelector(this.game.things);
-
-      var thingAddBtn = document.createElement("button");
-      thingAddBtn.innerHTML = 'Add Thing';
-      thingAddBtn.addEventListener(
+        var thingAddBtn = document.createElement("button");
+        thingAddBtn.innerHTML = 'Add Thing';
+        thingAddBtn.addEventListener(
+          "click",
+          function () {
+            me.addThing(me.addThingSelector.value);
+            me.game.updatePlayView();
+          },
+          false,
+        );
+        editView.append(this.addThingSelector,thingAddBtn)
+      }
+      var newThingBtn = document.createElement('button');
+      newThingBtn.innerHTML = "New Thing";
+      newThingBtn.addEventListener(
         "click",
-        function () {
-          me.addThing(me.addThingSelector.value);
-          me.game.updatePlayView();
+        function (){
+          me.newThing();
         },
         false,
       );
-      editView.append(this.addThingSelector,thingAddBtn)
-    }
-    var newThingBtn = document.createElement('button');
-    newThingBtn.innerHTML = "New Thing";
-    newThingBtn.addEventListener(
-      "click",
-      function (){
-        me.newThing();
-      },
-      false,
-    );
 
-    editView.append(newThingBtn,document.createElement('br'));
+      editView.append(newThingBtn,document.createElement('br'));
+    }
 
     var action_sp = document.createElement('span')
     var action_tv = document.createElement('div');
@@ -243,28 +246,34 @@ class GameContainer extends BuildingBlock{
       }
     }
 
-    var inputLabel = document.createElement("label")
-    inputLabel.innerHTML = "Name: ";
+    if (this.type == "Callback"){
+      var descLabel = document.createElement("label");
+      descLabel.innerHTML = this.description;
+      editView.append(descLabel,document.createElement('br'));
+    } else {
+      var inputLabel = document.createElement("label")
+      inputLabel.innerHTML = "Name: ";
 
-    var nameInputField = createElementWithAttributes('input',{'type':'text','maxlength':'25','size':'17'});
-    nameInputField.value = this.name;
-    nameInputField.addEventListener("change", (event)=> {
-      me.name = event.target.value;
-      bold.innerHTML = event.target.value + '[' + me.id + ']<br>';
-      me.updateNodes();
-    })
+      var nameInputField = createElementWithAttributes('input',{'type':'text','maxlength':'25','size':'17'});
+      nameInputField.value = this.name;
+      nameInputField.addEventListener("change", (event)=> {
+        me.name = event.target.value;
+        bold.innerHTML = event.target.value + '[' + me.id + ']<br>';
+        me.updateNodes();
+      })
 
-    editView.append(inputLabel,nameInputField,document.createElement('br'));
+      editView.append(inputLabel,nameInputField,document.createElement('br'));
 
-    var inputLabel2 = document.createElement("label");
-    inputLabel2.innerHTML = "Description: ";
+      var inputLabel2 = document.createElement("label");
+      inputLabel2.innerHTML = "Description: ";
 
-    var descInputField = createElementWithAttributes('input',{'type':'text','maxlength':'80','size':'80'});
-    descInputField.value = this.description;
-    descInputField.addEventListener("change", (event)=> {
-      me.description = event.target.value;
-      me.updateNodes();
-    })
-    editView.append(inputLabel2,descInputField,document.createElement('br'));
+      var descInputField = createElementWithAttributes('input',{'type':'text','maxlength':'80','size':'80'});
+      descInputField.value = this.description;
+      descInputField.addEventListener("change", (event)=> {
+        me.description = event.target.value;
+        me.updateNodes();
+      })
+      editView.append(inputLabel2,descInputField,document.createElement('br'));
+    }
   }
 }

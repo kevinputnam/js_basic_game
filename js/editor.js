@@ -27,6 +27,7 @@ function load_game(text){
   reset();
   var gameView = document.getElementById('gamedata');
   var jstuff = JSON.parse(text);
+  console.log(jstuff);
   game = new Game({"editor":true});
   game.load(jstuff);
   gameView.replaceChildren(game.getNode());
