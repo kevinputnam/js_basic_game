@@ -1777,6 +1777,45 @@
             "",
             "Your credit balance: `$player_credits`"
           ]
+        },
+        {
+          "name": "Action_menu",
+          "actions": null,
+          "choices": [
+            "Save game",
+            "Load game"
+          ],
+          "prompt": [
+            "Choose one:"
+          ],
+          "variable": "game_menu",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_save_game",
+                  "actions": null
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_load_game",
+                  "actions": null
+                }
+              ],
+              "value": "1"
+            }
+          ],
+          "variable": "game_menu"
         }
       ],
       "id": 24,

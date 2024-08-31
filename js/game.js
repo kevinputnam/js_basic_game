@@ -109,10 +109,11 @@ class Game extends GameContainer {
             this.player.direction = "right";
             break;
           case "a":
-            console.log('select');
+            // select button
+            this.select_pushed();
             break;
           case "s":
-            console.log('dismiss');
+            console.log('dismiss pushed');
             break;
           default:
             console.log('nothing');
@@ -175,13 +176,16 @@ class Game extends GameContainer {
       }
     }
 
-    window.addEventListener("keydown", this, false);
-    window.addEventListener("keyup",this,false);
+    if (args['cleanStart']){
+      window.addEventListener("keydown", this, false);
+      window.addEventListener("keyup",this,false);
 
-    this.running = true;
+      this.running = true;
+      this.stackLoop();
+      this.viewLoop();
+    }
+    this.runStack = [];
     this.runStack = this.runStack.concat(this.actions);
-    this.stackLoop();
-    this.viewLoop();
   }
 
   stop(){
@@ -572,6 +576,18 @@ class Game extends GameContainer {
     this.menuUseValue = false;
     this.buttonEventHandler = 'default';
   }
+
+  select_pushed(){
+    //put related actions at top of action queue
+    //
+    //need to create new actions:
+    //1. save game
+    //2. load game
+    //3. show inventory
+    //
+    console.log("do something");
+  }
+
 
   updateDisplay(nodeSpan){
     nodeSpan.innerHTML = '<b>'+this.name+ ':</b> ' + this.description;

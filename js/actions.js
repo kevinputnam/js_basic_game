@@ -1,7 +1,7 @@
 
 
 //register actions here, for add method.
-const action_types = ['Action_else','Action_loop','Action_if_eval','Action_menu','Action_message','Action_start_timer','Action_set_var','Action_change_scene','Action_move_thing','Action_switch','Action_case','Action_has_thing','Action_put_thing'];
+const action_types = ['Action_else','Action_loop','Action_if_eval','Action_menu','Action_message','Action_start_timer','Action_set_var','Action_change_scene','Action_move_thing','Action_switch','Action_case','Action_has_thing','Action_put_thing','Action_save_game','Action_load_game'];
 
 
 //prototype for all actions
@@ -169,6 +169,54 @@ class Action extends BuildingBlock{
           p_actions.splice(i+1,0,this);
         }
       }
+    }
+  }
+}
+
+class Action_save_game extends Action {
+
+  constructor(data) {
+    super(data);
+
+    this.name = "Action_save_game";
+    this.description = "Save the game progress.";
+  }
+
+  updateDisplay(nodeSpan){
+    nodeSpan.innerHTML = '<b>Save game progress.</b>';
+  }
+
+  run(args){
+    var data = this.game.save();
+    data['current_scene'] = this.game.currentScene.id;
+    data['variables'] = this.game.variables;
+    localStorage.setItem('save-game', JSON.stringify(data,null,'  '));
+  }
+}
+
+class Action_load_game extends Action {
+
+  constructor(data) {
+    super(data);
+
+    this.name = "Action_load_game";
+    this.description = "Load a saved game.";
+  }
+
+  updateDisplay(nodeSpan){
+    nodeSpan.innerHTML = '<b>Load saved game.</b>';
+  }
+
+    run(args){
+    var data = JSON.parse(localStorage.getItem('save-game'));
+    var sceneID = data['current_scene'];
+    if (data) {
+      this.game.load(data);
+      this.game.changeScene(sceneID);
+      this.game.variables = data['variables'];
+      this.game.movePlayer(this.game.player.location[0],this.game.player.location[1]);
+    } else {
+      console.log("no save game data");
     }
   }
 }
@@ -745,9 +793,7 @@ class Action_switch extends Action {
   }
 
   run(){
-    console.log(this.game.variables);
     var variableValue = this.game.variables[this.variable];
-    console.log(variableValue);
     var runActions = this.actions; //by default run the switch's actions
     for(const a of this.actions){
       if (a.name == 'Action_case'){

@@ -7,11 +7,16 @@ function get_game_data(){
 }
 
 function start_game(text){
-  reset();
+  var cleanStart = false;
+  if (!game){
+    reset();
+    game = new Game();
+    cleanStart = true;
+  }
   var jstuff = JSON.parse(text);
-  game = new Game();
+  game.variables = {};
   game.load(jstuff);
-  game.run({});
+  game.run({'cleanStart':cleanStart});
 }
 
 function reset(){
