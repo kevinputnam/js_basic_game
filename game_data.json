@@ -4622,11 +4622,12 @@
       "description": "Called when the game select button is pushed during normal play.",
       "actions": [
         {
-          "name": "Action_message",
+          "name": "Action_illustrated_message",
           "actions": null,
           "text_lines": [
-            "Hi!"
-          ]
+            "The dog says, \"Woof!\""
+          ],
+          "image_path": "assets/sprites/dog.png"
         }
       ]
     }
