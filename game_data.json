@@ -1777,45 +1777,6 @@
             "",
             "Your credit balance: `$player_credits`"
           ]
-        },
-        {
-          "name": "Action_menu",
-          "actions": null,
-          "choices": [
-            "Save game",
-            "Load game"
-          ],
-          "prompt": [
-            "Choose one:"
-          ],
-          "variable": "game_menu",
-          "useValue": false
-        },
-        {
-          "name": "Action_switch",
-          "actions": [
-            {
-              "name": "Action_case",
-              "actions": [
-                {
-                  "name": "Action_save_game",
-                  "actions": null
-                }
-              ],
-              "value": "0"
-            },
-            {
-              "name": "Action_case",
-              "actions": [
-                {
-                  "name": "Action_load_game",
-                  "actions": null
-                }
-              ],
-              "value": "1"
-            }
-          ],
-          "variable": "game_menu"
         }
       ],
       "id": 24,
@@ -4622,12 +4583,85 @@
       "description": "Called when the game select button is pushed during normal play.",
       "actions": [
         {
-          "name": "Action_illustrated_message",
+          "name": "Action_menu",
           "actions": null,
-          "text_lines": [
-            "The dog says, \"Woof!\""
+          "choices": [
+            "Save game",
+            "Load game"
           ],
-          "image_path": "assets/sprites/dog.png"
+          "prompt": [
+            "Choose one:"
+          ],
+          "variable": "game_menu_selection",
+          "useValue": false
+        },
+        {
+          "name": "Action_switch",
+          "actions": [
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_menu",
+                  "actions": null,
+                  "choices": [
+                    "Yes",
+                    "No"
+                  ],
+                  "prompt": [
+                    "Are you sure?"
+                  ],
+                  "variable": "save_selection",
+                  "useValue": false
+                },
+                {
+                  "name": "Action_if_eval",
+                  "actions": [
+                    {
+                      "name": "Action_save_game",
+                      "actions": null
+                    }
+                  ],
+                  "val1": "`$save_selection`",
+                  "val2": "0",
+                  "operator": "=="
+                }
+              ],
+              "value": "0"
+            },
+            {
+              "name": "Action_case",
+              "actions": [
+                {
+                  "name": "Action_menu",
+                  "actions": null,
+                  "choices": [
+                    "Yes",
+                    "No"
+                  ],
+                  "prompt": [
+                    "Are you sure?"
+                  ],
+                  "variable": "load_selection",
+                  "useValue": false
+                },
+                {
+                  "name": "Action_if_eval",
+                  "actions": [
+                    {
+                      "name": "Action_load_game",
+                      "actions": null
+                    }
+                  ],
+                  "val1": "`$load_selection`",
+                  "val2": "0",
+                  "operator": "=="
+                }
+              ],
+              "value": "1"
+            }
+          ],
+          "variable": "game_menu_selection"
         }
       ]
     }
