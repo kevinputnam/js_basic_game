@@ -1032,11 +1032,12 @@
                           ]
                         },
                         {
-                          "name": "Action_message",
+                          "name": "Action_illustrated_message",
                           "actions": null,
                           "text_lines": [
                             "\"Just kidding. Have a nice day.\""
-                          ]
+                          ],
+                          "image_path": "assets/sprites/robot.png"
                         }
                       ],
                       "value": "2"
