@@ -1,7 +1,7 @@
 
 
 //register actions here, for add method.
-const action_types = ['Action_else','Action_loop','Action_if_eval','Action_menu','Action_message','Action_start_timer','Action_set_var','Action_change_scene','Action_move_thing','Action_switch','Action_case','Action_has_thing','Action_put_thing','Action_save_game','Action_load_game'];
+const action_types = ['Action_else','Action_loop','Action_if_eval','Action_menu','Action_message','Action_start_timer','Action_set_var','Action_change_scene','Action_move_thing','Action_switch','Action_case','Action_has_thing','Action_put_thing','Action_save_game','Action_load_game','Action_illustrated_message'];
 
 
 //prototype for all actions
@@ -475,6 +475,101 @@ class Action_menu extends Action {
     })
 
     editView.append(inputLabel2,document.createElement("br"),menuInputField);
+  }
+}
+
+class Action_illustrated_message extends Action {
+
+  constructor(data) {
+    super(data);
+
+    this.name = "Action_illustrated_message";
+    this.description = "Display a modal message with an image.";
+
+    this.text_lines = [];
+    this.image_path = "";
+    this.image = document.createElement('img');
+  }
+
+  run(args){
+    var processedLines = [];
+    for (var line of this.text_lines){
+      processedLines.push(this.replaceVariables(line));
+    }
+    this.game.displayMessage(processedLines,this.image);
+  }
+
+  load(data){
+    super.load(data);
+    this.text_lines = data['text_lines'];
+    this.image_path = data['image_path'];
+    this.image.setAttribute('src',this.image_path);
+  }
+
+  save(){
+    var data = super.save();
+    data['text_lines'] = this.text_lines;
+    data['image_path'] = this.image_path;
+    return data;
+  }
+
+  updateDisplay(nodeSpan){
+    if (this.text_lines.length > 0){
+      if (this.text_lines[0].length >= 21){
+        nodeSpan.innerHTML = '<b>Illus. Message</b> "' + this.text_lines[0].slice(0,20) + '..."';
+      }else{
+        nodeSpan.innerHTML = '<b>Illus. Message</b> "' + this.text_lines[0] + '"';
+      }
+    }else{
+      nodeSpan.innerHTML = '<b>Illus. Message</b>';
+    }
+  }
+
+  edit(node){
+    super.edit(node);
+    var me = this;
+    var editView = document.getElementById("editactionview");
+
+    var inputLabel = document.createElement("label")
+    inputLabel.innerHTML = "Message: ";
+
+    var messageInputField = createElementWithAttributes('textarea',{'rows':'8','cols':'30'});
+
+    var text = '';
+    for (const line of this.text_lines){
+      text += line + "\n";
+    }
+    text = text.trim();
+
+    messageInputField.value = text;
+    messageInputField.addEventListener("change", (event)=> {
+      me.text_lines = event.target.value.split('\n');
+      me.updateNodes();
+    })
+
+    editView.append(inputLabel,document.createElement("br"),messageInputField,document.createElement("br"));
+
+    var inputLabel = document.createElement("label")
+    inputLabel.innerHTML = "Image: ";
+
+    var imageThumbnail = document.createElement('img');
+    imageThumbnail.setAttribute('style','width:50;');
+    if(this.image_path){
+      imageThumbnail.setAttribute('src',this.image_path);
+    }
+
+    var imageFileInputField = createElementWithAttributes('input',{'type':'text','maxlength':'100','size':'60'});
+    imageFileInputField.value = this.image_path;
+    imageFileInputField.addEventListener("change", (event)=> {
+      me.image_path = event.target.value;
+      imageThumbnail.setAttribute('src',event.target.value);
+    })
+
+    var imageAttrLabel = document.createElement("label")
+    imageAttrLabel.innerHTML = "Image width: " + this.image.width + " Image height: " + this.image.height;
+
+    editView.append(inputLabel,imageFileInputField,document.createElement('br'),imageThumbnail,document.createElement('br'),imageAttrLabel,document.createElement('br'));
+    editView.append(this.createRemoveButton(),document.createElement('br'),document.createElement('br'));
   }
 }
 

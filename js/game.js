@@ -25,9 +25,11 @@ class Game extends GameContainer {
     this.addingCollisions = false;
     this.removingCollisions = false;
     this.messageBoxDimensions = [200,100];
+    this.messageImageDimensions = [60,100];
     this.textFontSize = 10;
     this.textFont = this.textFontSize + "px courier";
     this.currentMessage = null;
+    this.currentMessageImage = null;
 
     var editor = false;
     if (data && "editor" in data){
@@ -503,9 +505,14 @@ class Game extends GameContainer {
   drawMessage(){
     if (this.currentMessage){
       var lineNum = 0;
-      //draw rectangle
+      //draw rectangle for text portion of message
       this.playContext.fillStyle = 'rgb(100,100,100)';
-      this.playContext.fillRect(80, 0, this.messageBoxDimensions[0], this.messageBoxDimensions[1])
+      this.playContext.fillRect(80, 0, this.messageBoxDimensions[0], this.messageBoxDimensions[1]);
+      //draw rectangle for image portion of message
+      if (this.currentMessageImage){
+        this.playContext.fillRect(20, 0, this.messageImageDimensions[0], this.messageImageDimensions[1]);
+        this.playContext.drawImage(this.currentMessageImage, 25, 5);
+      }
       //draw text
       this.playContext.fillStyle = "white";
       for(const line of this.currentMessage){
@@ -550,8 +557,9 @@ class Game extends GameContainer {
     }
   }
 
-  displayMessage(text_lines){
+  displayMessage(text_lines,image){
     this.currentMessage = text_lines;
+    this.currentMessageImage = image;
     this.buttonEventHandler = 'message';
     this.runStackPaused = true;
   }
@@ -559,6 +567,7 @@ class Game extends GameContainer {
   dismissMessage(){
     this.runStackPaused = false;
     this.currentMessage = null;
+    this.currentMessageImage = null;
     this.buttonEventHandler = 'default';
   }
 
