@@ -451,7 +451,7 @@ class Game extends GameContainer {
           var collisions = this.currentScene.collisions;
           var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
           if(event.offsetX/this.ctxScaling < this.currentScene.backgroundImage.width && event.offsetY/this.ctxScaling < this.currentScene.backgroundImage.height){
-            coordspan.innerHTML = "coords: " + Math.floor(event.offsetX/this.ctxScaling) + "," + Math.floor(event.offsetY/this.ctxScaling);
+            coordspan.innerHTML = Math.floor(event.offsetX/this.ctxScaling) + "," + Math.floor(event.offsetY/this.ctxScaling);
             var collClickX = Math.floor(event.offsetX/collisionLocScale);
             var collClickY = Math.floor(event.offsetY/collisionLocScale);
             if (this.addingCollisions){
