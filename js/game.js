@@ -444,12 +444,14 @@ class Game extends GameContainer {
   }
 
   collisionMouseMoveHandler = (event) => {
+    var coordspan = document.getElementById("cursorcoords");
     if (!this.running){
       if (this.currentScene){
         if(this.currentScene.backgroundImage){
           var collisions = this.currentScene.collisions;
           var collisionLocScale = this.ctxScaling * this.currentScene.collisionDimensions;
           if(event.offsetX/this.ctxScaling < this.currentScene.backgroundImage.width && event.offsetY/this.ctxScaling < this.currentScene.backgroundImage.height){
+            coordspan.innerHTML = "coords: " + Math.floor(event.offsetX/this.ctxScaling) + "," + Math.floor(event.offsetY/this.ctxScaling);
             var collClickX = Math.floor(event.offsetX/collisionLocScale);
             var collClickY = Math.floor(event.offsetY/collisionLocScale);
             if (this.addingCollisions){
@@ -592,13 +594,6 @@ class Game extends GameContainer {
   }
 
   select_pushed(){
-    //put related actions at top of action queue
-    //
-    //need to create new actions:
-    //1. save game
-    //2. load game
-    //3. show inventory
-    //
     this.callbacks["on_select_button"].run();
   }
 

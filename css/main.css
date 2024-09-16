@@ -79,6 +79,12 @@ div .editsave {
     display:none; /*hides scroll bars for webkit browsers*/
 }
 
+#mapcoords {
+  position: absolute;
+  left: 410px;
+  top: 852px;
+}
+
 #actionview {
     overflow: scroll;
     position: absolute;
