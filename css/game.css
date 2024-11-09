@@ -1,6 +1,5 @@
 #mapview {
     overflow: scroll;
-    position: absolute;
     left: 30px;
     top: 30px;
     width: 750px;
